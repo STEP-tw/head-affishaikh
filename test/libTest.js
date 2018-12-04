@@ -15,8 +15,9 @@ const fs = {
 
 describe('sliceContents', function() {
   it('should return a string of ten lines when given reader object and filename', function() {
+    let dataForSlicing = {fileNames : ['./testData/testFile1'], numberOfLines: 10}
     let expectedOutput = 'Hello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello'; 
-    let actualOutput = sliceContents(fs, './testData/testFile1');
+    let actualOutput = sliceContents(fs, dataForSlicing);
     assert.equal(actualOutput, expectedOutput);
   });
 
@@ -28,7 +29,9 @@ describe('sliceContents', function() {
 
   it('should return a string of 10 lines from testFile1 concatinatd with string of 10 lines from testFile2', function() {
     let expectedOutput = '==> ./testData/testFile1 <==\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\n\n==> ./testData/testFile2 <==\nOptimus Prime\nBumble Bee\nBulkhead\nArcee\nRatchet\nWheeljack\nUltramagnus\nSmoke Scream\nJack\nMico\nRaff';
+
     let actualOutput = sliceContents(fs, './testData/testFile1', './testData/testFile2');
+
     assert.equal(actualOutput, expectedOutput);
   });
 });
