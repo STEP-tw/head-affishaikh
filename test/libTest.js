@@ -25,4 +25,10 @@ describe('sliceContents', function() {
     let actualOutput = sliceContents(fs, './testData/testFile2', 2);
     assert.equal(actualOutput, expectedOutput);
   });
+
+  it('should return a string of 10 lines from testFile1 concatinatd with string of 10 lines from testFile2', function() {
+    let expectedOutput = '==> ./testData/testFile1 <==\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\n\n==> ./testData/testFile2 <==\nOptimus Prime\nBumble Bee\nBulkhead\nArcee\nRatchet\nWheeljack\nUltramagnus\nSmoke Scream\nJack\nMico\nRaff';
+    let actualOutput = sliceContents(fs, './testData/testFile1', './testData/testFile2');
+    assert.equal(actualOutput, expectedOutput);
+  });
 });
