@@ -1,4 +1,5 @@
-const {sliceContents} = require('./src/library.js');
+const {sliceContents} = require('../src/library.js');
+const assert = require('assert');
 
 const readFileSync = function(filePath, encoding) {
   return this[filePath];
