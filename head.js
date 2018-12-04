@@ -14,5 +14,8 @@
   node ./head.js -c 5 file1 file2
 */
 
+const {sliceContents} = require('./src/library.js'); 
+const fs = require('fs');
 
-
+let contents = sliceContents(fs, process.argv[2]);
+console.log(contents);

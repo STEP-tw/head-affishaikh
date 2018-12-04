@@ -9,6 +9,7 @@ const fs = {
   './testData/testFile1' : 'Hello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello',
 
   './testData/testFile2' : 'Optimus Prime\nBumble Bee\nBulkhead\nArcee\nRatchet\nWheeljack\nUltramagnus\nSmoke Scream\nJack\nMico\nRaff',
+
   readFileSync : readFileSync
 }
 
@@ -18,6 +19,7 @@ describe('sliceContents', function() {
     let actualOutput = sliceContents(fs, './testData/testFile1');
     assert.equal(actualOutput, expectedOutput);
   });
+
   it('should return a string of two lines when given reader object, filepath and 2 numberOfLines', function() {
     let expectedOutput = 'Optimus Prime\nBumble Bee'; 
     let actualOutput = sliceContents(fs, './testData/testFile2', 2);
