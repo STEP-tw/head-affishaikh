@@ -1,6 +1,6 @@
 const extractUserInput = function(userInputForHead) {
-  let dataForSlicing = {};
-  dataForSlicing.filePaths = [];
+  let headPrerequisites = {};
+  headPrerequisites.filePaths = [];
   let substrIndex = 1;
   let numberOfLines = 10;
   let fileReaderIndex = 0;
@@ -19,9 +19,9 @@ const extractUserInput = function(userInputForHead) {
     fileReaderIndex = 2;
   }
   
-  dataForSlicing.numberOfLines = numberOfLines;
-  dataForSlicing.filePaths = userInputForHead.slice(fileReaderIndex);
-  return dataForSlicing;
+  headPrerequisites.numberOfLines = numberOfLines;
+  headPrerequisites.filePaths = userInputForHead.slice(fileReaderIndex);
+  return headPrerequisites;
 }
 
 module.exports = {extractUserInput};

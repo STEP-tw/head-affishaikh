@@ -24,4 +24,4 @@ const main = function(userInputForHead) {
   console.log(contents);
 }
 
-main(process.argv.slice(2,));
+main(process.argv.slice(2));

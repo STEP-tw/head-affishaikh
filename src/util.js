@@ -9,4 +9,12 @@ const createReducer = function(readFileSync, numberOfLines) {
   }
 }
 
-module.exports = {createReducer};
+const optionExtractor = function(option) {
+  let extractedOption = '-n'; 
+  if(option.match(/^-c/)) {
+    extractedOption = '-c';
+  }
+  return extractedOption;
+}
+
+module.exports = {createReducer, optionExtractor};
