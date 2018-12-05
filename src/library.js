@@ -1,18 +1,23 @@
-const {createReducer} = require('./util.js');
+const {createReducer, sliceLines, sliceCharacters} = require('./util.js');
 
 const getHeadContents = function(readFileSync, headPrerequisites) {
   let numberOfFiles = headPrerequisites.filePaths.length;
-  let numberOfLines = headPrerequisites.numberOfLines;
+  let optionValue = headPrerequisites.optionValue;
   let filePaths = headPrerequisites.filePaths;
+  let option = headPrerequisites.option;
+  let sliceContents = sliceLines;
   let result = '';
 
+  if(option === '-c') {
+    sliceContents = sliceCharacters;
+  }
+
   if(numberOfFiles === 1) {
-    let splittedContents = readFileSync(filePaths[0], 'utf8').split('\n');
-    result = splittedContents.slice(0,numberOfLines).join('\n');
+    result = sliceContents(readFileSync, optionValue, filePaths[0]);
     return result;
   }
 
-  let reducer = createReducer(readFileSync, numberOfLines);
+  let reducer = createReducer(readFileSync, sliceContents, optionValue);
   result = filePaths.reduce(reducer,'');
   return result; 
 }
