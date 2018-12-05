@@ -43,4 +43,10 @@ describe('extractUserInput', function() {
     let actualOutput = extractUserInput(['-c5','file1']);
     assert.deepEqual(expectedOutput, actualOutput);
   });
+
+  it('should return an object of 2 filepaths and 5 optionValue and option as -c when given two files and -c 5', function() {
+    let expectedOutput = {'filePaths' : ['file1','file2'], 'optionValue' : 5, 'option' : '-c'}; 
+    let actualOutput = extractUserInput(['-c','5','file1','file2']);
+    assert.deepEqual(expectedOutput, actualOutput);
+  });
 });
