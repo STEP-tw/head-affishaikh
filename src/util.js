@@ -1,9 +1,15 @@
+const sliceLines = function(readFileSync, optionValue, filePath) {
+  let result = readFileSync(filePath, 'utf8').split('\n');   
+  result = result.slice(0, optionValue).join('\n');
+  return result;
+}
+
 const createReducer = function(readFileSync, numberOfLines) {
   let delimeter = '';
   return function(result, filePath) {
     result = result + delimeter + '==> '+ filePath + ' <==\n';
-    let splittedContents = readFileSync(filePath, 'utf8').split('\n'); 
-    result = result + splittedContents.slice(0,numberOfLines).join('\n');
+    let slicedContents = sliceLines(readFileSync, numberOfLines, filePath);
+    result = result + slicedContents; 
     delimeter = '\n\n';
     return result;
   }

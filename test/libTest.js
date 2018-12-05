@@ -29,4 +29,11 @@ describe('getHeadContents', function() {
     let actualOutput = getHeadContents(readFileSync, headPrerequisites);
     assert.equal(actualOutput, expectedOutput);
   });
+
+  it('should return a string of 5 characters from testFile2 when give -c5 and filename', function() {
+    let headPrerequisites = {filePaths : ['./testData/testFile2'], optionValue: 5, option: '-c'};
+    let expectedOutput = 'Optim';
+    let actualOutput = getHeadContents(readFileSync, headPrerequisites);
+    assert.equal(actualOutput, expectedOutput);
+  });
 });
