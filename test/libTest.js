@@ -36,4 +36,18 @@ describe('getHeadContents', function() {
     let actualOutput = getHeadContents(readFileSync, headPrerequisites);
     assert.equal(actualOutput, expectedOutput);
   });
+
+  it('should return a string of 10 characters from testFile2 when given -c10 and filename', function() {
+    let headPrerequisites = {filePaths : ['./testData/testFile2'], optionValue: 10, option: '-c'};
+    let expectedOutput = 'Optimus Pr';
+    let actualOutput = getHeadContents(readFileSync, headPrerequisites);
+    assert.equal(actualOutput, expectedOutput);
+  });
+
+  it('should return a string of 5 characters from testFile1 concatinated with testFile2 when given -c5 and filenames', function() {
+    let headPrerequisites = {filePaths : ['./testData/testFile1','./testData/testFile2'], optionValue: 5, option: '-c'};
+    let expectedOutput = '==> ./testData/testFile1 <==\nHello\n==> ./testData/testFile2 <==\nOptim';
+    let actualOutput = getHeadContents(readFileSync, headPrerequisites);
+    assert.equal(actualOutput, expectedOutput);
+  });
 });

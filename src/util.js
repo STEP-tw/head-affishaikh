@@ -15,7 +15,8 @@ const createReducer = function(readFileSync, sliceContents, optionValue) {
     result = result + delimeter + '==> '+ filePath + ' <==\n';
     let slicedContents = sliceContents(readFileSync, optionValue, filePath);
     result = result + slicedContents; 
-    delimeter = '\n\n';
+    delimeter = '\n';
+    if(sliceContents.name === 'sliceLines') {delimeter = '\n\n'};
     return result;
   }
 }
