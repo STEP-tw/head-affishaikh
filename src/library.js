@@ -4,8 +4,9 @@ const sliceContents = function(fs, dataForSlicing) {
   let filePaths = dataForSlicing.filePaths;
   let delimeter = '';
   let result = '';
+
   if(numberOfFiles === 1) {
-    result = result + fs.readFileSync(filePaths[0], 'utf8').split('\n').slice(0,numberOfLines).join('\n');
+    result = fs.readFileSync(filePaths[0], 'utf8').split('\n').slice(0,numberOfLines).join('\n');
     return result;
   }
 
