@@ -7,7 +7,8 @@ const getHeadContents = function(readFileSync, headPrerequisites) {
   let result = '';
 
   if(numberOfFiles === 1) {
-    result = readFileSync(filePaths[0], 'utf8').split('\n').slice(0,numberOfLines).join('\n');
+    let splittedContents = readFileSync(filePaths[0], 'utf8').split('\n');
+    result = splittedContents.slice(0,numberOfLines).join('\n');
     return result;
   }
 
