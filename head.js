@@ -14,13 +14,13 @@
   node ./head.js -c 5 file1 file2
 */
 
-const {sliceContents} = require('./src/library.js');
+const {getHeadContents} = require('./src/library.js');
 const {extractUserInput} = require('./src/handleUserInput.js');
-const fs = require('fs');
+const {readFileSync} = require('fs');
 
 const main = function(userInputForHead) {
-  let dataForSlicing = extractUserInput(userInputForHead);
-  let contents = sliceContents(fs, dataForSlicing);
+  let headPrerequisites = extractUserInput(userInputForHead);
+  let contents = getHeadContents(readFileSync, headPrerequisites);
   console.log(contents);
 }
 

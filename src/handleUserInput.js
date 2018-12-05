@@ -10,7 +10,7 @@ const extractUserInput = function(userInputForHead) {
   }
 
   if(userInputForHead[0].match(/^-/)) {
-    numberOfLines = +userInputForHead[0].substr(substrIndex,);
+    numberOfLines = +userInputForHead[0].substr(substrIndex);
     fileReaderIndex = 1;
   }
   
@@ -20,10 +20,7 @@ const extractUserInput = function(userInputForHead) {
   }
   
   dataForSlicing.numberOfLines = numberOfLines;
-
-  for(; fileReaderIndex <= userInputForHead.length-1; fileReaderIndex++) {
-    dataForSlicing.filePaths.push(userInputForHead[fileReaderIndex]);
-  }
+  dataForSlicing.filePaths = userInputForHead.slice(fileReaderIndex);
   return dataForSlicing;
 }
 
