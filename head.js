@@ -20,7 +20,8 @@ const fs = require('fs');
 
 const main = function(userInputForHead) {
   let dataForSlicing = extractUserInput(userInputForHead);
-  console.log(dataForSlicing);
+  let contents = sliceContents(fs, dataForSlicing);
+  console.log(contents);
 }
 
 main(process.argv.slice(2,));

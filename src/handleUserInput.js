@@ -7,22 +7,20 @@ const extractUserInput = function(userInputForHead) {
 
   if(userInputForHead[0].match(/^-n[0-9]/)) {
     substrIndex = 2;
-    fileReaderIndex = 1;
-    numberOfLines = +userInputForHead[0].substr(substrIndex,);
   }
 
-  if(userInputForHead[0].match(/^-[0-9]/)) {
+  if(userInputForHead[0].match(/^-/)) {
     numberOfLines = +userInputForHead[0].substr(substrIndex,);
     fileReaderIndex = 1;
+  }
+  
+  if(userInputForHead[0] === '-n') {
+    numberOfLines = +userInputForHead[1];
+    fileReaderIndex = 2;
   }
   
   dataForSlicing.numberOfLines = numberOfLines;
 
-  if(userInputForHead[0] === '-n') {
-    dataForSlicing.numberOfLines = +userInputForHead[1];
-    fileReaderIndex = 2;
-  }
-  
   for(; fileReaderIndex <= userInputForHead.length-1; fileReaderIndex++) {
     dataForSlicing.filePaths.push(userInputForHead[fileReaderIndex]);
   }
