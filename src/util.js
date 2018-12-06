@@ -1,22 +1,22 @@
-const sliceLines = function(readFileSync, optionValue, filePath) {
+const sliceTopByLines = function(readFileSync, optionValue, filePath) {
   let result = readFileSync(filePath, 'utf8').split('\n');   
   result = result.slice(0, optionValue).join('\n');
   return result;
 }
 
-const sliceCharacters = function(readFileSync, optionValue, filePath) {
+const sliceTopByCharacters = function(readFileSync, optionValue, filePath) {
   let result = readFileSync(filePath, 'utf8').substr(0,optionValue);
   return result;
 }
 
-const createReducer = function(readFileSync, sliceContents, optionValue) {
+const createReducer = function(readFileSync, sliceTopContents, optionValue) {
   let delimeter = '';
   return function(result, filePath) {
     result = result + delimeter + '==> '+ filePath + ' <==\n';
-    let slicedContents = sliceContents(readFileSync, optionValue, filePath);
+    let slicedContents = sliceTopContents(readFileSync, optionValue, filePath);
     result = result + slicedContents; 
     delimeter = '\n';
-    if(sliceContents.name === 'sliceLines') {delimeter = '\n\n'};
+    if(sliceTopContents.name === 'sliceTopByLines') {delimeter = '\n\n'};
     return result;
   }
 }
@@ -29,4 +29,4 @@ const optionExtractor = function(option) {
   return extractedOption;
 }
 
-module.exports = {createReducer, optionExtractor, sliceLines, sliceCharacters};
+module.exports = {createReducer, optionExtractor, sliceTopByLines, sliceTopByCharacters};

@@ -1,21 +1,21 @@
-const {createReducer, sliceLines, sliceCharacters} = require('./util.js');
+const {createReducer, sliceTopByLines, sliceTopByCharacters} = require('./util.js');
 
 const getHeadContents = function(readFileSync, headPrerequisites) {
   let numberOfFiles = headPrerequisites.filePaths.length;
   let {filePaths, optionValue, option} = headPrerequisites;
   let result = '';
-  let sliceContents = sliceLines;
+  let sliceTopContents = sliceTopByLines;
 
   if(option === '-c') {
-    sliceContents = sliceCharacters;
+    sliceTopContents = sliceTopByCharacters;
   }
 
   if(numberOfFiles === 1) {
-    result = sliceContents(readFileSync, optionValue, filePaths[0]);
+    result = sliceTopContents(readFileSync, optionValue, filePaths[0]);
     return result;
   }
 
-  let reducer = createReducer(readFileSync, sliceContents, optionValue);
+  let reducer = createReducer(readFileSync, sliceTopContents, optionValue);
   result = filePaths.reduce(reducer,'');
   return result; 
 }
