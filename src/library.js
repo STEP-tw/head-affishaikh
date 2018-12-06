@@ -2,11 +2,9 @@ const {createReducer, sliceLines, sliceCharacters} = require('./util.js');
 
 const getHeadContents = function(readFileSync, headPrerequisites) {
   let numberOfFiles = headPrerequisites.filePaths.length;
-  let optionValue = headPrerequisites.optionValue;
-  let filePaths = headPrerequisites.filePaths;
-  let option = headPrerequisites.option;
-  let sliceContents = sliceLines;
+  let {filePaths, optionValue, option} = headPrerequisites;
   let result = '';
+  let sliceContents = sliceLines;
 
   if(option === '-c') {
     sliceContents = sliceCharacters;
