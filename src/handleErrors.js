@@ -1,10 +1,6 @@
 const handleErrors = function(headPrerequisites) {
   let {filePaths, optionValue, option} = headPrerequisites;
   let error = handleIllegalCount(optionValue, option);   
-  if(error.occured) {
-    console.log(error.message);
-    process.exit(0);
-  }
   return error;
 }
 

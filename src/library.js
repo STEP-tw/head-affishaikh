@@ -6,8 +6,12 @@ const getHeadContents = function(fs, headPrerequisites) {
   let numberOfFiles = headPrerequisites.filePaths.length;
   let {filePaths, optionValue, option} = headPrerequisites;
   let result = '';
-  let error = handleErrors(headPrerequisites);
   let sliceTopContents = sliceTopByLines;
+  let error = handleErrors(headPrerequisites);
+
+  if(error.occured) {
+    return error.message;
+  }
 
   if(option === '-c') {
     sliceTopContents = sliceTopByCharacters;
