@@ -15,12 +15,12 @@ const extractUserInput = function(userInput) {
   }
 
   if(userInput[0].match(/^-/)) {
-    optionValue = +userInput[0].substr(substrIndex);
+    optionValue = userInput[0].substr(substrIndex);
     fileReaderIndex = 1;
   }
   
   if(userInput[0] === option) {
-    optionValue = +userInput[1];
+    optionValue = userInput[1];
     fileReaderIndex = 2;
   }
   
