@@ -1,22 +1,32 @@
-const sliceTopByLines = function(readFileSync, optionValue, filePath) {
+const {handleMissingFile} = require('./handleErrors.js');
+
+const sliceTopByLines = function(fs, optionValue, filePath) {
+  let {readFileSync, existsSync} = fs;
+
+  let error = handleMissingFile(existsSync, filePath);
+  if(error.occured) {
+    return error.message;
+  }
+
   let result = readFileSync(filePath, 'utf8').split('\n');   
   result = result.slice(0, optionValue).join('\n');
   return result;
 }
 
-const sliceTopByCharacters = function(readFileSync, optionValue, filePath) {
+const sliceTopByCharacters = function(fs, optionValue, filePath) {
+  let {readFileSync} = fs;
   let result = readFileSync(filePath, 'utf8').substr(0,optionValue);
   return result;
 }
 
-const createReducer = function(readFileSync, sliceTopContents, optionValue) {
+const createReducer = function(fs, sliceTopContents, optionValue) {
   let delimeter = '';
   return function(result, filePath) {
-    result = result + delimeter + '==> '+ filePath + ' <==\n';
-    let slicedContents = sliceTopContents(readFileSync, optionValue, filePath);
+    let slicedContents = sliceTopContents(fs, optionValue, filePath);
+    let heading = '==> '+ filePath + ' <==\n'
+    result = result + delimeter + heading; 
     result = result + slicedContents; 
     delimeter = '\n';
-    if(sliceTopContents.name === 'sliceTopByLines') {delimeter = '\n\n'};
     return result;
   }
 }

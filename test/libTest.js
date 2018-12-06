@@ -35,7 +35,7 @@ describe('getHeadContents', function() {
 
   it('should return a string of 10 lines from testFile1 concatinatd with string of 10 lines from testFile2', function() {
     let headPrerequisites = {filePaths : ['./testData/testFile1', './testData/testFile2'], optionValue : 10, option : '-n'};
-    let expectedOutput = '==> ./testData/testFile1 <==\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\n\n==> ./testData/testFile2 <==\nOptimus Prime\nBumble Bee\nBulkhead\nArcee\nRatchet\nWheeljack\nUltramagnus\nSmoke Scream\nJack\nMico';
+    let expectedOutput = '==> ./testData/testFile1 <==\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\n==> ./testData/testFile2 <==\nOptimus Prime\nBumble Bee\nBulkhead\nArcee\nRatchet\nWheeljack\nUltramagnus\nSmoke Scream\nJack\nMico';
     let actualOutput = getHeadContents(fs, headPrerequisites);
     assert.equal(actualOutput, expectedOutput);
   });
