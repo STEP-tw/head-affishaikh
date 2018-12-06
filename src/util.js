@@ -22,8 +22,11 @@ const sliceTopByCharacters = function(fs, optionValue, filePath) {
 const createReducer = function(fs, sliceTopContents, optionValue) {
   let delimeter = '';
   return function(result, filePath) {
-    let slicedContents = sliceTopContents(fs, optionValue, filePath);
     let heading = '==> '+ filePath + ' <==\n'
+    let slicedContents = sliceTopContents(fs, optionValue, filePath);
+    if(slicedContents === 'head: '+filePath+': No such file or directory') {
+      heading = '';
+    }
     result = result + delimeter + heading; 
     result = result + slicedContents; 
     delimeter = '\n';
