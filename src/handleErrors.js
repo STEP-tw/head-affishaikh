@@ -1,3 +1,12 @@
+const handleErrors = function(headPrerequisites) {
+  let {filePaths, optionValue, option} = headPrerequisites;
+  let illegalCountError = handleIllegalCount(optionValue, option);   
+  if(illegalCountError.occured) {
+    console.log(illegalCountError.message);
+    process.exit(0);
+  }
+}
+
 const handleIllegalCount = function(optionValue, option) {
   let error = {occured: 0}; 
   let errorOptions = {'-n' : 'line', '-c' : 'byte'};
@@ -9,4 +18,4 @@ const handleIllegalCount = function(optionValue, option) {
   return error;
 }
 
-module.exports = {handleIllegalCount};
+module.exports = {handleErrors, handleIllegalCount};
