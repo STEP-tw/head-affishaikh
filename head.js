@@ -17,11 +17,11 @@
 const {getHeadContents} = require('./src/library.js');
 const {extractUserInput} = require('./src/handleUserInput.js');
 const {handleErrors} = require('./src/handleErrors');
-const {readFileSync} = require('fs');
+const {readFileSync, existsSync} = require('fs');
 
 const main = function(userInputForHead) {
   let headPrerequisites = extractUserInput(userInputForHead);
-  handleErrors(headPrerequisites); 
+  let error = handleErrors(headPrerequisites, existsSync); 
   let contents = getHeadContents(readFileSync, headPrerequisites);
   console.log(contents);
 }
