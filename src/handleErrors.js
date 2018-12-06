@@ -1,12 +1,6 @@
-const handleErrors = function(headPrerequisites, exists) {
+const handleErrors = function(headPrerequisites) {
   let {filePaths, optionValue, option} = headPrerequisites;
   let error = handleIllegalCount(optionValue, option);   
-  if(error.occured) {
-    console.log(error.message);
-    process.exit(0);
-  }
-
-  error = handleMissingFile(exists, filePaths[0]);
   if(error.occured) {
     console.log(error.message);
     process.exit(0);
@@ -25,8 +19,8 @@ const handleIllegalCount = function(optionValue, option) {
   return error;
 }
 
-const handleMissingFile = function(exists, fileName) {
-  let doesExist = exists(fileName);
+const handleMissingFile = function(existsSync, fileName) {
+  let doesExist = existsSync(fileName);
   let error = { occured : 0 };
   if(!doesExist) {
     error.occured = 1;

@@ -1,9 +1,12 @@
 const {createReducer, sliceTopByLines, sliceTopByCharacters} = require('./util.js');
+const {handleMissingFile, handleErrors, handleIllegalCount} = require('./handleErrors.js');
 
-const getHeadContents = function(readFileSync, headPrerequisites) {
+const getHeadContents = function(fs, headPrerequisites) {
+  let {readFileSync, existsSync} = fs;
   let numberOfFiles = headPrerequisites.filePaths.length;
   let {filePaths, optionValue, option} = headPrerequisites;
   let result = '';
+  let error = handleErrors(headPrerequisites);
   let sliceTopContents = sliceTopByLines;
 
   if(option === '-c') {
@@ -11,6 +14,10 @@ const getHeadContents = function(readFileSync, headPrerequisites) {
   }
 
   if(numberOfFiles === 1) {
+    error = handleMissingFile(existsSync, filePaths[0]);
+    if(error.occured) {
+      return error.message;
+    }
     result = sliceTopContents(readFileSync, optionValue, filePaths[0]);
     return result;
   }
