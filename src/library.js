@@ -9,6 +9,17 @@ const {
   handleIllegalCount
 } = require("./handleErrors.js");
 
+const isOptionForBytes = option => option === "-c";
+const isOnlyOneFile = numberOfFiles => numberOfFiles === 1;
+const headForMultipleFiles = function(fs, sliceTopContents, headPrerequisites) {
+  let reducer = createReducer(
+    fs,
+    sliceTopContents,
+    headPrerequisites.optionValue
+  );
+  return headPrerequisites.filePaths.reduce(reducer, "");
+};
+
 const getHeadContents = function(fs, headPrerequisites) {
   let numberOfFiles = headPrerequisites.filePaths.length;
   let { filePaths, optionValue, option } = headPrerequisites;
@@ -20,17 +31,16 @@ const getHeadContents = function(fs, headPrerequisites) {
     return error.message;
   }
 
-  if (option === "-c") {
+  if (isOptionForBytes(option)) {
     sliceTopContents = sliceTopByCharacters;
   }
 
-  if (numberOfFiles === 1) {
+  if (isOnlyOneFile(numberOfFiles)) {
     result = sliceTopContents(fs, optionValue, filePaths[0]);
     return result;
   }
 
-  let reducer = createReducer(fs, sliceTopContents, optionValue);
-  result = filePaths.reduce(reducer, "");
+  result = headForMultipleFiles(fs, sliceTopContents, headPrerequisites);
   return result;
 };
 
