@@ -150,4 +150,33 @@ describe("getHeadContents", function() {
     let actualOutput = getHeadContents(fs, headPrerequisites);
     assert.equal(actualOutput, expectedOutput);
   });
+
+  it("should return an missing file error and contents of other when given a missing file and one present name and -c option", function() {
+    let headPrerequisites = {
+      filePaths: ['file1','./testData/testFile1'],
+      optionValue: 5,
+      option: "-n"
+    };
+    let expectedOutput = "head: file1: No such file or directory\n==> ./testData/testFile1 <==\nHello\nHello\nHello\nHello\nHello";
+    let expectedFiles = {};
+    expectedFiles['./testData/testFile1'] = 'Hello\nHello\nHello\nHello\nHello\nHello\nHello';
+    fs.readFileSync = createReader(expectedFiles, "utf8");
+    fs.existsSync = createExistsSync(['./testData/testFile1']);
+    let actualOutput = getHeadContents(fs, headPrerequisites);
+    assert.equal(actualOutput, expectedOutput);
+  });
+
+  it("should return illegal count error when given an illegal count", function() {
+    let headPrerequisites = {
+      filePaths: ["file1"],
+      optionValue: -5,
+      option: "-n"
+    };
+    let expectedOutput = "head: illegal line count -- -5";
+    let expectedFiles = {};
+    fs.readFileSync = createReader(expectedFiles, "utf8");
+    fs.existsSync = createExistsSync([]);
+    let actualOutput = getHeadContents(fs, headPrerequisites);
+    assert.equal(actualOutput, expectedOutput);
+  });
 });
