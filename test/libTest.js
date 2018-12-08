@@ -1,14 +1,13 @@
 const { getHeadContents } = require("../src/library.js");
 const assert = require("assert");
 
-const readFileSync = function(filePath, encoding) {
-  let files = {};
-  files["./testData/testFile1"] =
-    "Hello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello";
-  files["./testData/testFile2"] =
-    "Optimus Prime\nBumble Bee\nBulkhead\nArcee\nRatchet\nWheeljack\nUltramagnus\nSmoke Scream\nJack\nMico\nRaff";
-  return files[filePath];
-};
+const createReader = function(expectedFiles, expectedEncoding) {
+  return function(actualFilePath, actualEncoding) {
+    if(expectedEncoding === actualEncoding) {
+      return expectedFiles[actualFilePath];
+    }
+  }
+}
 
 const existsSync = function(fileName) {
   let fileNames = ["./testData/testFile1", "./testData/testFile2"];
@@ -16,7 +15,6 @@ const existsSync = function(fileName) {
 };
 
 const fs = {
-  readFileSync: readFileSync,
   existsSync: existsSync
 };
 
@@ -29,6 +27,9 @@ describe("getHeadContents", function() {
     };
     let expectedOutput =
       "Hello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello";
+    let expectedFiles = {};
+    expectedFiles['./testData/testFile1'] = expectedOutput;   
+    fs.readFileSync = createReader(expectedFiles,'utf8');
     let actualOutput = getHeadContents(fs, headPrerequisites);
     assert.equal(actualOutput, expectedOutput);
   });
@@ -40,6 +41,9 @@ describe("getHeadContents", function() {
       option: "-n"
     };
     let expectedOutput = "Optimus Prime\nBumble Bee";
+    let expectedFiles = {};
+    expectedFiles['./testData/testFile2'] = expectedOutput;   
+    fs.readFileSync = createReader(expectedFiles,'utf8',expectedOutput);
     let actualOutput = getHeadContents(fs, headPrerequisites);
     assert.equal(actualOutput, expectedOutput);
   });
@@ -52,6 +56,10 @@ describe("getHeadContents", function() {
     };
     let expectedOutput =
       "==> ./testData/testFile1 <==\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\n==> ./testData/testFile2 <==\nOptimus Prime\nBumble Bee\nBulkhead\nArcee\nRatchet\nWheeljack\nUltramagnus\nSmoke Scream\nJack\nMico";
+    let expectedFiles = {};
+    expectedFiles['./testData/testFile1'] = 'Hello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello';   
+    expectedFiles['./testData/testFile2'] = "Optimus Prime\nBumble Bee\nBulkhead\nArcee\nRatchet\nWheeljack\nUltramagnus\nSmoke Scream\nJack\nMico";
+    fs.readFileSync = createReader(expectedFiles,'utf8',expectedOutput);
     let actualOutput = getHeadContents(fs, headPrerequisites);
     assert.equal(actualOutput, expectedOutput);
   });
@@ -63,6 +71,9 @@ describe("getHeadContents", function() {
       option: "-c"
     };
     let expectedOutput = "Optim";
+    let expectedFiles = {};
+    expectedFiles['./testData/testFile2'] = 'Optim'; 
+    fs.readFileSync = createReader(expectedFiles,'utf8',expectedOutput);
     let actualOutput = getHeadContents(fs, headPrerequisites);
     assert.equal(actualOutput, expectedOutput);
   });
@@ -74,6 +85,9 @@ describe("getHeadContents", function() {
       option: "-c"
     };
     let expectedOutput = "Optimus Pr";
+    let expectedFiles = {};
+    expectedFiles['./testData/testFile2'] = 'Optimus Pr'; 
+    fs.readFileSync = createReader(expectedFiles,'utf8',expectedOutput);
     let actualOutput = getHeadContents(fs, headPrerequisites);
     assert.equal(actualOutput, expectedOutput);
   });
@@ -86,6 +100,10 @@ describe("getHeadContents", function() {
     };
     let expectedOutput =
       "==> ./testData/testFile1 <==\nHello\n==> ./testData/testFile2 <==\nOptim";
+    let expectedFiles = {};
+    expectedFiles['./testData/testFile1'] = 'Hello'; 
+    expectedFiles['./testData/testFile2'] = 'Optim'; 
+    fs.readFileSync = createReader(expectedFiles,'utf8',expectedOutput);
     let actualOutput = getHeadContents(fs, headPrerequisites);
     assert.equal(actualOutput, expectedOutput);
   });
