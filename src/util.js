@@ -14,7 +14,13 @@ const sliceTopByLines = function(fs, optionValue, filePath) {
 };
 
 const sliceTopByCharacters = function(fs, optionValue, filePath) {
-  let { readFileSync } = fs;
+  let { readFileSync, existsSync } = fs;
+
+  let error = handleMissingFile(existsSync, filePath);
+  if (error.occured) {
+    return error.message;
+  }
+
   let result = readFileSync(filePath, "utf8").substr(0, optionValue);
   return result;
 };
