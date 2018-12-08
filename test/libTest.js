@@ -9,16 +9,14 @@ const createReader = function(expectedFiles, expectedEncoding) {
   }
 }
 
-const existsSync = function(fileName) {
-  let fileNames = ["./testData/testFile1", "./testData/testFile2"];
-  return fileNames.includes(fileName);
-};
-
-const fs = {
-  existsSync: existsSync
+const createExistingFileChecker = function(fileNames) {
+  return function(fileName) {
+    return fileNames.includes(fileName);
+  }
 };
 
 describe("getHeadContents", function() {
+  const fs = {};
   it("should return a string of ten lines when given reader object and filename", function() {
     let headPrerequisites = {
       filePaths: ["./testData/testFile1"],
@@ -30,6 +28,7 @@ describe("getHeadContents", function() {
     let expectedFiles = {};
     expectedFiles['./testData/testFile1'] = expectedOutput;   
     fs.readFileSync = createReader(expectedFiles,'utf8');
+    fs.existsSync = createExistingFileChecker(['./testData/testFile1']);
     let actualOutput = getHeadContents(fs, headPrerequisites);
     assert.equal(actualOutput, expectedOutput);
   });
@@ -43,7 +42,8 @@ describe("getHeadContents", function() {
     let expectedOutput = "Optimus Prime\nBumble Bee";
     let expectedFiles = {};
     expectedFiles['./testData/testFile2'] = expectedOutput;   
-    fs.readFileSync = createReader(expectedFiles,'utf8',expectedOutput);
+    fs.readFileSync = createReader(expectedFiles,'utf8');
+    fs.existsSync = createExistingFileChecker(['./testData/testFile2']);
     let actualOutput = getHeadContents(fs, headPrerequisites);
     assert.equal(actualOutput, expectedOutput);
   });
@@ -59,7 +59,8 @@ describe("getHeadContents", function() {
     let expectedFiles = {};
     expectedFiles['./testData/testFile1'] = 'Hello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello';   
     expectedFiles['./testData/testFile2'] = "Optimus Prime\nBumble Bee\nBulkhead\nArcee\nRatchet\nWheeljack\nUltramagnus\nSmoke Scream\nJack\nMico";
-    fs.readFileSync = createReader(expectedFiles,'utf8',expectedOutput);
+    fs.readFileSync = createReader(expectedFiles,'utf8');
+    fs.existsSync = createExistingFileChecker(['./testData/testFile1','./testData/testFile2']);
     let actualOutput = getHeadContents(fs, headPrerequisites);
     assert.equal(actualOutput, expectedOutput);
   });
@@ -73,7 +74,8 @@ describe("getHeadContents", function() {
     let expectedOutput = "Optim";
     let expectedFiles = {};
     expectedFiles['./testData/testFile2'] = 'Optim'; 
-    fs.readFileSync = createReader(expectedFiles,'utf8',expectedOutput);
+    fs.readFileSync = createReader(expectedFiles,'utf8');
+    fs.existsSync = createExistingFileChecker(['./testData/testFile2']);
     let actualOutput = getHeadContents(fs, headPrerequisites);
     assert.equal(actualOutput, expectedOutput);
   });
@@ -87,7 +89,8 @@ describe("getHeadContents", function() {
     let expectedOutput = "Optimus Pr";
     let expectedFiles = {};
     expectedFiles['./testData/testFile2'] = 'Optimus Pr'; 
-    fs.readFileSync = createReader(expectedFiles,'utf8',expectedOutput);
+    fs.readFileSync = createReader(expectedFiles,'utf8');
+    fs.existsSync = createExistingFileChecker(['./testData/testFile2']);
     let actualOutput = getHeadContents(fs, headPrerequisites);
     assert.equal(actualOutput, expectedOutput);
   });
@@ -103,7 +106,22 @@ describe("getHeadContents", function() {
     let expectedFiles = {};
     expectedFiles['./testData/testFile1'] = 'Hello'; 
     expectedFiles['./testData/testFile2'] = 'Optim'; 
-    fs.readFileSync = createReader(expectedFiles,'utf8',expectedOutput);
+    fs.readFileSync = createReader(expectedFiles,'utf8');
+    fs.existsSync = createExistingFileChecker(['./testData/testFile1','./testData/testFile2']);
+    let actualOutput = getHeadContents(fs, headPrerequisites);
+    assert.equal(actualOutput, expectedOutput);
+  });
+
+  it("should return an missing file error when given a missing file name", function() {
+    let headPrerequisites = {
+      filePaths: ['file1'],
+      optionValue: 5,
+      option: "-n"
+    };
+    let expectedOutput = 'head: file1: No such file or directory';
+    let expectedFiles = {};
+    fs.readFileSync = createReader(expectedFiles,'utf8');
+    fs.existsSync = createExistingFileChecker([]);
     let actualOutput = getHeadContents(fs, headPrerequisites);
     assert.equal(actualOutput, expectedOutput);
   });
