@@ -29,7 +29,7 @@ describe("getContents", function() {
       "Hello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello";
     let expectedFiles = {};
     expectedFiles["./testData/testFile1"] =
-      "Hello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello";
+      "Hello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\n";
     fs.readFileSync = createReader(expectedFiles, "utf8");
     fs.existsSync = createExistsSync(["./testData/testFile1"]);
     let actualOutput = getContents(fs, prerequisites);
@@ -46,7 +46,7 @@ describe("getContents", function() {
     let expectedOutput = "Optimus Prime\nBumble Bee";
     let expectedFiles = {};
     expectedFiles["./testData/testFile2"] =
-      "Optimus Prime\nBumble Bee\nBulkhead";
+      "Optimus Prime\nBumble Bee\nBulkhead\n";
     fs.readFileSync = createReader(expectedFiles, "utf8");
     fs.existsSync = createExistsSync(["./testData/testFile2"]);
     let actualOutput = getContents(fs, prerequisites);
@@ -64,9 +64,9 @@ describe("getContents", function() {
       "==> ./testData/testFile1 <==\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\n==> ./testData/testFile2 <==\nOptimus Prime\nBumble Bee\nBulkhead\nArcee\nRatchet\nWheeljack\nUltramagnus\nSmoke Scream\nJack\nMico";
     let expectedFiles = {};
     expectedFiles["./testData/testFile1"] =
-      "Hello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello";
+      "Hello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\n";
     expectedFiles["./testData/testFile2"] =
-      "Optimus Prime\nBumble Bee\nBulkhead\nArcee\nRatchet\nWheeljack\nUltramagnus\nSmoke Scream\nJack\nMico";
+      "Optimus Prime\nBumble Bee\nBulkhead\nArcee\nRatchet\nWheeljack\nUltramagnus\nSmoke Scream\nJack\nMico\n";
     fs.readFileSync = createReader(expectedFiles, "utf8");
     fs.existsSync = createExistsSync([
       "./testData/testFile1",
@@ -85,7 +85,7 @@ describe("getContents", function() {
     };
     let expectedOutput = "Optim";
     let expectedFiles = {};
-    expectedFiles["./testData/testFile2"] = "Optim";
+    expectedFiles["./testData/testFile2"] = "Optim\n";
     fs.readFileSync = createReader(expectedFiles, "utf8");
     fs.existsSync = createExistsSync(["./testData/testFile2"]);
     let actualOutput = getContents(fs, prerequisites);
@@ -101,7 +101,7 @@ describe("getContents", function() {
     };
     let expectedOutput = "Optimus Pr";
     let expectedFiles = {};
-    expectedFiles["./testData/testFile2"] = "Optimus Pr";
+    expectedFiles["./testData/testFile2"] = "Optimus Pr\n";
     fs.readFileSync = createReader(expectedFiles, "utf8");
     fs.existsSync = createExistsSync(["./testData/testFile2"]);
     let actualOutput = getContents(fs, prerequisites);
@@ -118,8 +118,8 @@ describe("getContents", function() {
     let expectedOutput =
       "==> ./testData/testFile1 <==\nHello\n==> ./testData/testFile2 <==\nOptim";
     let expectedFiles = {};
-    expectedFiles["./testData/testFile1"] = "Hello";
-    expectedFiles["./testData/testFile2"] = "Optim";
+    expectedFiles["./testData/testFile1"] = "Hello\n";
+    expectedFiles["./testData/testFile2"] = "Optim\n";
     fs.readFileSync = createReader(expectedFiles, "utf8");
     fs.existsSync = createExistsSync([
       "./testData/testFile1",
@@ -168,7 +168,7 @@ describe("getContents", function() {
     };
     let expectedOutput = "head: file1: No such file or directory\n==> ./testData/testFile1 <==\nHello\nHello\nHello\nHello\nHello";
     let expectedFiles = {};
-    expectedFiles['./testData/testFile1'] = 'Hello\nHello\nHello\nHello\nHello\nHello\nHello';
+    expectedFiles['./testData/testFile1'] = 'Hello\nHello\nHello\nHello\nHello\nHello\nHello\n';
     fs.readFileSync = createReader(expectedFiles, "utf8");
     fs.existsSync = createExistsSync(['./testData/testFile1']);
     let actualOutput = getContents(fs, prerequisites);
@@ -199,7 +199,7 @@ describe("getContents", function() {
     };
     let expectedOutput = "9\n10";
     let expectedFiles = {};
-    expectedFiles['./data.txt'] = '1\n2\n3\n4\n5\n6\n7\n8\n9\n10';
+    expectedFiles['./data.txt'] = '1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n';
     fs.readFileSync = createReader(expectedFiles, "utf8");
     fs.existsSync = createExistsSync(['./data.txt']);
     let actualOutput = getContents(fs, prerequisites);
@@ -212,9 +212,9 @@ describe("getContents", function() {
       option: "-c",
       action : 'tail'
     };
-    let expectedOutput = "6\n7\n8\n9\n10";
+    let expectedOutput = "\n7\n8\n9\n10\n";
     let expectedFiles = {};
-    expectedFiles['./data.txt'] = '1\n2\n3\n4\n5\n6\n7\n8\n9\n10';
+    expectedFiles['./data.txt'] = '1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n';
     fs.readFileSync = createReader(expectedFiles, "utf8");
     fs.existsSync = createExistsSync(['./data.txt']);
     let actualOutput = getContents(fs, prerequisites);

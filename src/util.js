@@ -9,6 +9,7 @@ const sliceTopByLines = function(fs, range, filePath) {
   }
 
   let result = readFileSync(filePath, "utf8").split("\n");
+  result.pop();
   result = result.slice(range[0], range[1]).join("\n");
   return result;
 };
