@@ -31,10 +31,11 @@ const createReducer = function(fs, sliceContents, prerequisites) {
   let delimeter = "";
   return function(result, filePath) {
     let heading = "==> " + filePath + " <==\n";
+    let {action} = prerequisites;
     let slicedContents = sliceContents(fs, filePath, prerequisites);
     if (
       slicedContents ===
-      "head: " + filePath + ": No such file or directory"
+      action+": " + filePath + ": No such file or directory"
     ) {
       heading = "";
     }
