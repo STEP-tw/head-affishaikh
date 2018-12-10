@@ -11,22 +11,22 @@ const {
 
 const isOptionForBytes = option => option === "-c";
 const isOnlyOneFile = numberOfFiles => numberOfFiles === 1;
-const headForMultipleFiles = function(fs, sliceContents, headPrerequisites) {
+const headForMultipleFiles = function(fs, sliceContents, prerequisites) {
   let reducer = createReducer(
     fs,
     sliceContents,
-    headPrerequisites.range
+    prerequisites.range
   );
-  return headPrerequisites.filePaths.reduce(reducer, "");
+  return prerequisites.filePaths.reduce(reducer, "");
 };
 
-const getContents = function(fs, headPrerequisites) {
-  let numberOfFiles = headPrerequisites.filePaths.length;
-  let { filePaths, optionValue, option, action } = headPrerequisites;
+const getContents = function(fs, prerequisites) {
+  let numberOfFiles = prerequisites.filePaths.length;
+  let { filePaths, optionValue, option, action } = prerequisites;
   let result = "";
   let sliceContents = sliceContentsByLines;
 
-  let error = handleErrors(headPrerequisites);
+  let error = handleErrors(prerequisites);
   if (error.occured) {
     return error.message;
   }
@@ -35,7 +35,7 @@ const getContents = function(fs, headPrerequisites) {
   if (action === 'tail') {
     range = [-optionValue];
   }
-  headPrerequisites.range = range;
+  prerequisites.range = range;
 
   if (isOptionForBytes(option)) {
     sliceContents = sliceContentsByCharacters;
@@ -46,7 +46,7 @@ const getContents = function(fs, headPrerequisites) {
     return result;
   }
 
-  result = headForMultipleFiles(fs, sliceContents, headPrerequisites);
+  result = headForMultipleFiles(fs, sliceContents, prerequisites);
   return result;
 };
 
