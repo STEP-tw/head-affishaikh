@@ -205,4 +205,19 @@ describe("getContents", function() {
     let actualOutput = getContents(fs, prerequisites);
     assert.equal(actualOutput, expectedOutput);
   })
+  it("should return last ten characters of file", function() {
+    let prerequisites = {
+      filePaths: ["./data.txt"],
+      optionValue: 10,
+      option: "-c",
+      action : 'tail'
+    };
+    let expectedOutput = "6\n7\n8\n9\n10";
+    let expectedFiles = {};
+    expectedFiles['./data.txt'] = '1\n2\n3\n4\n5\n6\n7\n8\n9\n10';
+    fs.readFileSync = createReader(expectedFiles, "utf8");
+    fs.existsSync = createExistsSync(['./data.txt']);
+    let actualOutput = getContents(fs, prerequisites);
+    assert.equal(actualOutput, expectedOutput);
+  })
 });
