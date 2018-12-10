@@ -35,7 +35,8 @@ describe("handleMissingFile", function() {
       occured: 1,
       message: "head: file2: No such file or directory"
     };
-    let actualOutput = handleMissingFile(exists, "file2");
+    let prerequisites = {'action' : 'head'};
+    let actualOutput = handleMissingFile(exists, "file2", prerequisites);
     assert.deepEqual(expectedOutput, actualOutput);
   });
 });

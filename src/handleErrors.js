@@ -16,12 +16,13 @@ const handleIllegalCount = function(optionValue, option) {
   return error;
 };
 
-const handleMissingFile = function(existsSync, fileName) {
+const handleMissingFile = function(existsSync, fileName, prerequisites) {
   let doesExist = existsSync(fileName);
+  let {action} = prerequisites;
   let error = { occured: 0 };
   if (!doesExist) {
     error.occured = 1;
-    error.message = "head: " + fileName + ": No such file or directory";
+    error.message = action+": " + fileName + ": No such file or directory";
   }
   return error;
 };

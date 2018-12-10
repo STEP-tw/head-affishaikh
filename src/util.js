@@ -1,9 +1,10 @@
 const { handleMissingFile } = require("./handleErrors.js");
 
-const sliceContentsByLines = function(fs, range, filePath) {
+const sliceContentsByLines = function(fs, filePath, prerequisites) {
   let { readFileSync, existsSync } = fs;
+  let {range, action} = prerequisites;
 
-  let error = handleMissingFile(existsSync, filePath);
+  let error = handleMissingFile(existsSync, filePath, prerequisites);
   if (error.occured) {
     return error.message;
   }
@@ -13,10 +14,11 @@ const sliceContentsByLines = function(fs, range, filePath) {
   return result;
 };
 
-const sliceContentsByCharacters = function(fs, range, filePath) {
+const sliceContentsByCharacters = function(fs, filePath, prerequisites) {
   let { readFileSync, existsSync } = fs;
+  let {range, action} = prerequisites;
 
-  let error = handleMissingFile(existsSync, filePath);
+  let error = handleMissingFile(existsSync, filePath, prerequisites);
   if (error.occured) {
     return error.message;
   }
@@ -25,11 +27,11 @@ const sliceContentsByCharacters = function(fs, range, filePath) {
   return result;
 };
 
-const createReducer = function(fs, sliceContents, range) {
+const createReducer = function(fs, sliceContents, prerequisites) {
   let delimeter = "";
   return function(result, filePath) {
     let heading = "==> " + filePath + " <==\n";
-    let slicedContents = sliceContents(fs, range, filePath);
+    let slicedContents = sliceContents(fs, filePath, prerequisites);
     if (
       slicedContents ===
       "head: " + filePath + ": No such file or directory"

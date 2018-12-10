@@ -15,7 +15,7 @@ const headForMultipleFiles = function(fs, sliceContents, prerequisites) {
   let reducer = createReducer(
     fs,
     sliceContents,
-    prerequisites.range
+    prerequisites
   );
   return prerequisites.filePaths.reduce(reducer, "");
 };
@@ -42,7 +42,7 @@ const getContents = function(fs, prerequisites) {
   }
 
   if (isOnlyOneFile(numberOfFiles)) {
-    result = sliceContents(fs, range, filePaths[0]);
+    result = sliceContents(fs, filePaths[0], prerequisites);
     return result;
   }
 
