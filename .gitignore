@@ -2,3 +2,5 @@
 *.swo
 .testLog
 .actual_out
+coverage
+.nyc_output/

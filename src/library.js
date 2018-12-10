@@ -1,7 +1,7 @@
 const {
   createReducer,
-  sliceTopByLines,
-  sliceTopByCharacters
+  sliceContentsByLines,
+  sliceContentsByCharacters
 } = require("./util.js");
 const {
   handleMissingFile,
@@ -11,10 +11,10 @@ const {
 
 const isOptionForBytes = option => option === "-c";
 const isOnlyOneFile = numberOfFiles => numberOfFiles === 1;
-const headForMultipleFiles = function(fs, sliceTopContents, headPrerequisites) {
+const headForMultipleFiles = function(fs, sliceContents, headPrerequisites) {
   let reducer = createReducer(
     fs,
-    sliceTopContents,
+    sliceContents,
     headPrerequisites.range
   );
   return headPrerequisites.filePaths.reduce(reducer, "");
@@ -24,7 +24,7 @@ const getContents = function(fs, headPrerequisites) {
   let numberOfFiles = headPrerequisites.filePaths.length;
   let { filePaths, optionValue, option, action } = headPrerequisites;
   let result = "";
-  let sliceTopContents = sliceTopByLines;
+  let sliceContents = sliceContentsByLines;
 
   let error = handleErrors(headPrerequisites);
   if (error.occured) {
@@ -38,15 +38,15 @@ const getContents = function(fs, headPrerequisites) {
   headPrerequisites.range = range;
 
   if (isOptionForBytes(option)) {
-    sliceTopContents = sliceTopByCharacters;
+    sliceContents = sliceContentsByCharacters;
   }
 
   if (isOnlyOneFile(numberOfFiles)) {
-    result = sliceTopContents(fs, range, filePaths[0]);
+    result = sliceContents(fs, range, filePaths[0]);
     return result;
   }
 
-  result = headForMultipleFiles(fs, sliceTopContents, headPrerequisites);
+  result = headForMultipleFiles(fs, sliceContents, headPrerequisites);
   return result;
 };
 
