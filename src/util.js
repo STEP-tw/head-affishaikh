@@ -25,11 +25,11 @@ const sliceContentsByCharacters = function(fs, range, filePath) {
   return result;
 };
 
-const createReducer = function(fs, sliceContentsContents, range) {
+const createReducer = function(fs, sliceContents, range) {
   let delimeter = "";
   return function(result, filePath) {
     let heading = "==> " + filePath + " <==\n";
-    let slicedContents = sliceContentsContents(fs, range, filePath);
+    let slicedContents = sliceContents(fs, range, filePath);
     if (
       slicedContents ===
       "head: " + filePath + ": No such file or directory"
