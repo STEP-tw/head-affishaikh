@@ -14,14 +14,14 @@
   node ./head.js -c 5 file1 file2
 */
 
-const { getHeadContents } = require("./src/library.js");
+const { getContents } = require("./src/library.js");
 const { extractUserInput } = require("./src/handleUserInput.js");
 const fs = require("fs");
 
 const main = function(userInputForHead) {
   let headPrerequisites = extractUserInput(userInputForHead);
   headPrerequisites.action = 'head';
-  let contents = getHeadContents(fs, headPrerequisites);
+  let contents = getContents(fs, headPrerequisites);
   console.log(contents);
 };
 
