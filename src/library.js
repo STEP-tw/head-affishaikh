@@ -30,8 +30,11 @@ const getContents = function(fs, headPrerequisites) {
   if (error.occured) {
     return error.message;
   }
-
+  
   let range = [0, optionValue];
+  if (action === 'tail') {
+    range = [-optionValue];
+  }
   headPrerequisites.range = range;
 
   if (isOptionForBytes(option)) {
