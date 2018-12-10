@@ -16,7 +16,6 @@
 
 const { getHeadContents } = require("./src/library.js");
 const { extractUserInput } = require("./src/handleUserInput.js");
-const { handleErrors } = require("./src/handleErrors");
 const fs = require("fs");
 
 const main = function(userInputForHead) {

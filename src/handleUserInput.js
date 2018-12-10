@@ -36,7 +36,7 @@ const getFileReaderIndex = function(mixedOption, option) {
 };
 
 const extractUserInput = function(userInput) {
-  let headPrerequisites = {};
+  let prerequisites = {};
   let filePaths = [];
   let option = optionExtractor(userInput[0]);
   let regex = "^" + option + "[0-9]";
@@ -45,8 +45,8 @@ const extractUserInput = function(userInput) {
   let optionValue = getOptionValue(userInput.slice(0,2), option, substrIndex);
   let fileReaderIndex = getFileReaderIndex(userInput[0], option);
   filePaths = userInput.slice(fileReaderIndex);
-  headPrerequisites = { filePaths, optionValue, option };
-  return headPrerequisites;
+  prerequisites = { filePaths, optionValue, option };
+  return prerequisites;
 };
 
 module.exports = { extractUserInput };
