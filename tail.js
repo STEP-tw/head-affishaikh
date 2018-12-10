@@ -15,13 +15,14 @@
 */
 
 const { extractUserInput } = require("./src/handleUserInput.js");
+const {getContents} = require('./src/library.js');
 const fs = require("fs");
 
 const main = function(userInputForHead) {
   let tailPrerequisites = extractUserInput(userInputForHead);
-  // let contents = getHeadContents(fs, headPrerequisites);
-  console.log(tailPrerequisites);
+  tailPrerequisites.action = 'tail';
+  let contents = getContents(fs, tailPrerequisites);
+  console.log(contents);
 };
 
 main(process.argv.slice(2));
-
