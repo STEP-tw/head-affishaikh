@@ -20,6 +20,7 @@ const fs = require("fs");
 
 const main = function(userInputForHead) {
   let headPrerequisites = extractUserInput(userInputForHead);
+  headPrerequisites.action = 'head';
   let contents = getHeadContents(fs, headPrerequisites);
   console.log(contents);
 };

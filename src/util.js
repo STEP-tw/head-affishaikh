@@ -1,6 +1,6 @@
 const { handleMissingFile } = require("./handleErrors.js");
 
-const sliceTopByLines = function(fs, optionValue, filePath) {
+const sliceTopByLines = function(fs, range, filePath) {
   let { readFileSync, existsSync } = fs;
 
   let error = handleMissingFile(existsSync, filePath);
@@ -9,11 +9,11 @@ const sliceTopByLines = function(fs, optionValue, filePath) {
   }
 
   let result = readFileSync(filePath, "utf8").split("\n");
-  result = result.slice(0, optionValue).join("\n");
+  result = result.slice(range[0], range[1]).join("\n");
   return result;
 };
 
-const sliceTopByCharacters = function(fs, optionValue, filePath) {
+const sliceTopByCharacters = function(fs, range, filePath) {
   let { readFileSync, existsSync } = fs;
 
   let error = handleMissingFile(existsSync, filePath);
@@ -21,15 +21,15 @@ const sliceTopByCharacters = function(fs, optionValue, filePath) {
     return error.message;
   }
 
-  let result = readFileSync(filePath, "utf8").substr(0, optionValue);
+  let result = readFileSync(filePath, "utf8").substr(range[0], range[1]);
   return result;
 };
 
-const createReducer = function(fs, sliceTopContents, optionValue) {
+const createReducer = function(fs, sliceTopContents, range) {
   let delimeter = "";
   return function(result, filePath) {
     let heading = "==> " + filePath + " <==\n";
-    let slicedContents = sliceTopContents(fs, optionValue, filePath);
+    let slicedContents = sliceTopContents(fs, range, filePath);
     if (
       slicedContents ===
       "head: " + filePath + ": No such file or directory"

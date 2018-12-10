@@ -1,4 +1,4 @@
-const { getHeadContents } = require("../src/library.js");
+const { getContents } = require("../src/library.js");
 const assert = require("assert");
 
 const createReader = function(expectedFiles, expectedEncoding) {
@@ -15,7 +15,7 @@ const createExistsSync = function(fileNames) {
   };
 };
 
-describe("getHeadContents", function() {
+describe("getContents", function() {
   const fs = {};
 
   it("should return a string of ten lines when given reader object and filename", function() {
@@ -31,7 +31,7 @@ describe("getHeadContents", function() {
       "Hello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello";
     fs.readFileSync = createReader(expectedFiles, "utf8");
     fs.existsSync = createExistsSync(["./testData/testFile1"]);
-    let actualOutput = getHeadContents(fs, headPrerequisites);
+    let actualOutput = getContents(fs, headPrerequisites);
     assert.equal(actualOutput, expectedOutput);
   });
 
@@ -47,7 +47,7 @@ describe("getHeadContents", function() {
       "Optimus Prime\nBumble Bee\nBulkhead";
     fs.readFileSync = createReader(expectedFiles, "utf8");
     fs.existsSync = createExistsSync(["./testData/testFile2"]);
-    let actualOutput = getHeadContents(fs, headPrerequisites);
+    let actualOutput = getContents(fs, headPrerequisites);
     assert.equal(actualOutput, expectedOutput);
   });
 
@@ -69,7 +69,7 @@ describe("getHeadContents", function() {
       "./testData/testFile1",
       "./testData/testFile2"
     ]);
-    let actualOutput = getHeadContents(fs, headPrerequisites);
+    let actualOutput = getContents(fs, headPrerequisites);
     assert.equal(actualOutput, expectedOutput);
   });
 
@@ -84,7 +84,7 @@ describe("getHeadContents", function() {
     expectedFiles["./testData/testFile2"] = "Optim";
     fs.readFileSync = createReader(expectedFiles, "utf8");
     fs.existsSync = createExistsSync(["./testData/testFile2"]);
-    let actualOutput = getHeadContents(fs, headPrerequisites);
+    let actualOutput = getContents(fs, headPrerequisites);
     assert.equal(actualOutput, expectedOutput);
   });
 
@@ -99,7 +99,7 @@ describe("getHeadContents", function() {
     expectedFiles["./testData/testFile2"] = "Optimus Pr";
     fs.readFileSync = createReader(expectedFiles, "utf8");
     fs.existsSync = createExistsSync(["./testData/testFile2"]);
-    let actualOutput = getHeadContents(fs, headPrerequisites);
+    let actualOutput = getContents(fs, headPrerequisites);
     assert.equal(actualOutput, expectedOutput);
   });
 
@@ -119,7 +119,7 @@ describe("getHeadContents", function() {
       "./testData/testFile1",
       "./testData/testFile2"
     ]);
-    let actualOutput = getHeadContents(fs, headPrerequisites);
+    let actualOutput = getContents(fs, headPrerequisites);
     assert.equal(actualOutput, expectedOutput);
   });
 
@@ -133,7 +133,7 @@ describe("getHeadContents", function() {
     let expectedFiles = {};
     fs.readFileSync = createReader(expectedFiles, "utf8");
     fs.existsSync = createExistsSync([]);
-    let actualOutput = getHeadContents(fs, headPrerequisites);
+    let actualOutput = getContents(fs, headPrerequisites);
     assert.equal(actualOutput, expectedOutput);
   });
 
@@ -147,7 +147,7 @@ describe("getHeadContents", function() {
     let expectedFiles = {};
     fs.readFileSync = createReader(expectedFiles, "utf8");
     fs.existsSync = createExistsSync([]);
-    let actualOutput = getHeadContents(fs, headPrerequisites);
+    let actualOutput = getContents(fs, headPrerequisites);
     assert.equal(actualOutput, expectedOutput);
   });
 
@@ -162,7 +162,7 @@ describe("getHeadContents", function() {
     expectedFiles['./testData/testFile1'] = 'Hello\nHello\nHello\nHello\nHello\nHello\nHello';
     fs.readFileSync = createReader(expectedFiles, "utf8");
     fs.existsSync = createExistsSync(['./testData/testFile1']);
-    let actualOutput = getHeadContents(fs, headPrerequisites);
+    let actualOutput = getContents(fs, headPrerequisites);
     assert.equal(actualOutput, expectedOutput);
   });
 
@@ -176,7 +176,7 @@ describe("getHeadContents", function() {
     let expectedFiles = {};
     fs.readFileSync = createReader(expectedFiles, "utf8");
     fs.existsSync = createExistsSync([]);
-    let actualOutput = getHeadContents(fs, headPrerequisites);
+    let actualOutput = getContents(fs, headPrerequisites);
     assert.equal(actualOutput, expectedOutput);
   });
 });

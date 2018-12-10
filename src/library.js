@@ -15,14 +15,14 @@ const headForMultipleFiles = function(fs, sliceTopContents, headPrerequisites) {
   let reducer = createReducer(
     fs,
     sliceTopContents,
-    headPrerequisites.optionValue
+    headPrerequisites.range
   );
   return headPrerequisites.filePaths.reduce(reducer, "");
 };
 
-const getHeadContents = function(fs, headPrerequisites) {
+const getContents = function(fs, headPrerequisites) {
   let numberOfFiles = headPrerequisites.filePaths.length;
-  let { filePaths, optionValue, option } = headPrerequisites;
+  let { filePaths, optionValue, option, action } = headPrerequisites;
   let result = "";
   let sliceTopContents = sliceTopByLines;
 
@@ -31,12 +31,15 @@ const getHeadContents = function(fs, headPrerequisites) {
     return error.message;
   }
 
+  let range = [0, optionValue];
+  headPrerequisites.range = range;
+
   if (isOptionForBytes(option)) {
     sliceTopContents = sliceTopByCharacters;
   }
 
   if (isOnlyOneFile(numberOfFiles)) {
-    result = sliceTopContents(fs, optionValue, filePaths[0]);
+    result = sliceTopContents(fs, range, filePaths[0]);
     return result;
   }
 
@@ -44,4 +47,4 @@ const getHeadContents = function(fs, headPrerequisites) {
   return result;
 };
 
-module.exports = { getHeadContents };
+module.exports = { getContents };
