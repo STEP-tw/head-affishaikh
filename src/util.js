@@ -1,5 +1,9 @@
 const { handleMissingFile } = require("./handleErrors.js");
 
+const isRangeZero = range => range[0] === 0
+const isActionTail = action => action === 'tail'
+const isTailRangeZero = (range,action) => isRangeZero(range) && isActionTail(action)
+
 const sliceContentsByLines = function(fs, filePath, prerequisites) {
   let { readFileSync, existsSync } = fs;
   let {range, action} = prerequisites;
@@ -9,7 +13,7 @@ const sliceContentsByLines = function(fs, filePath, prerequisites) {
     return error.message;
   }
 
-  if(range[0] === 0 && action === 'tail') {
+  if( isTailRangeZero(range, action) ) {
     return '';
   }
 
@@ -27,7 +31,7 @@ const sliceContentsByCharacters = function(fs, filePath, prerequisites) {
     return error.message;
   }
 
-  if(range[0] === 0 && action === 'tail') {
+  if(isTailRangeZero(range, action)) {
     return '';
   }
 
