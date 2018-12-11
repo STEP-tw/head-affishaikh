@@ -9,6 +9,11 @@ const {
 
 const isOptionForBytes = option => option === "-c";
 const isOnlyOneFile = numberOfFiles => numberOfFiles === 1;
+const getRange = function(optionValue, action) {
+  let range = {'head': [0, optionValue], 'tail': [-Math.abs(optionValue)]};
+  return range[action];
+}
+
 const headForMultipleFiles = function(fs, sliceContents, prerequisites) {
   let reducer = createReducer(
     fs,
@@ -29,10 +34,7 @@ const getContents = function(fs, prerequisites) {
     return error.message;
   }
   
-  let range = [0, optionValue];
-  if (action === 'tail') {
-    range = [-Math.abs(optionValue)];
-  }
+  let range = getRange(optionValue, action);
   prerequisites.range = range;
 
   if (isOptionForBytes(option)) {
