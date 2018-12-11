@@ -9,6 +9,10 @@ const sliceContentsByLines = function(fs, filePath, prerequisites) {
     return error.message;
   }
 
+  if(range[0] === 0 && action === 'tail') {
+    return '';
+  }
+
   let result = readFileSync(filePath, "utf8").split("\n");
   result = result.slice(range[0], range[1]).join("\n");
   return result;
@@ -21,6 +25,10 @@ const sliceContentsByCharacters = function(fs, filePath, prerequisites) {
   let error = handleMissingFile(existsSync, filePath, prerequisites);
   if (error.occured) {
     return error.message;
+  }
+
+  if(range[0] === 0 && action === 'tail') {
+    return '';
   }
 
   let result = readFileSync(filePath, "utf8").substr(range[0], range[1]);
