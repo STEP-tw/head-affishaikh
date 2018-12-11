@@ -4,9 +4,7 @@ const {
   sliceContentsByCharacters
 } = require("./util.js");
 const {
-  handleMissingFile,
-  handleErrors,
-  handleIllegalCount
+  handleErrors
 } = require("./handleErrors.js");
 
 const isOptionForBytes = option => option === "-c";
@@ -33,7 +31,7 @@ const getContents = function(fs, prerequisites) {
   
   let range = [0, optionValue];
   if (action === 'tail') {
-    range = [-optionValue];
+    range = [-Math.abs(optionValue)];
   }
   prerequisites.range = range;
 
