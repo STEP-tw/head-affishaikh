@@ -41,4 +41,9 @@ const handleMissingFile = function(existsSync, fileName, prerequisites) {
   return error;
 };
 
-module.exports = { handleErrors, handleHeadIllegalCount, handleMissingFile, handleTailIllegalOffset };
+module.exports = {
+  handleErrors,
+  handleHeadIllegalCount,
+  handleMissingFile,
+  handleTailIllegalOffset
+};

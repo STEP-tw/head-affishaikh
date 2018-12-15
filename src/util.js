@@ -1,20 +1,21 @@
 const { handleMissingFile } = require("./handleErrors.js");
 
-const isRangeZero = range => range[0] === 0
-const isActionTail = action => action === 'tail'
-const isTailRangeZero = (range,action) => isRangeZero(range) && isActionTail(action)
+const isRangeZero = range => range[0] === 0;
+const isActionTail = action => action === "tail";
+const isTailRangeZero = (range, action) =>
+  isRangeZero(range) && isActionTail(action);
 
 const sliceContentsByLines = function(fs, filePath, prerequisites) {
   let { readFileSync, existsSync } = fs;
-  let {range, action} = prerequisites;
+  let { range, action } = prerequisites;
 
   let error = handleMissingFile(existsSync, filePath, prerequisites);
   if (error.occured) {
     return error.message;
   }
 
-  if( isTailRangeZero(range, action) ) {
-    return '';
+  if (isTailRangeZero(range, action)) {
+    return "";
   }
 
   let result = readFileSync(filePath, "utf8").split("\n");
@@ -24,15 +25,15 @@ const sliceContentsByLines = function(fs, filePath, prerequisites) {
 
 const sliceContentsByCharacters = function(fs, filePath, prerequisites) {
   let { readFileSync, existsSync } = fs;
-  let {range, action} = prerequisites;
+  let { range, action } = prerequisites;
 
   let error = handleMissingFile(existsSync, filePath, prerequisites);
   if (error.occured) {
     return error.message;
   }
 
-  if(isTailRangeZero(range, action)) {
-    return '';
+  if (isTailRangeZero(range, action)) {
+    return "";
   }
 
   let result = readFileSync(filePath, "utf8").substr(range[0], range[1]);
@@ -43,11 +44,11 @@ const createReducer = function(fs, sliceContents, prerequisites) {
   let delimeter = "";
   return function(result, filePath) {
     let heading = "==> " + filePath + " <==\n";
-    let {action} = prerequisites;
+    let { action } = prerequisites;
     let slicedContents = sliceContents(fs, filePath, prerequisites);
     if (
       slicedContents ===
-      action+": " + filePath + ": No such file or directory"
+      action + ": " + filePath + ": No such file or directory"
     ) {
       heading = "";
     }

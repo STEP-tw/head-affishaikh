@@ -11,7 +11,8 @@ const getSubstrIndex = function(option, regex) {
 };
 
 const isOptionValueGiven = option => option.match(/^-/);
-const isOptionSeparateFromValue = (mixedOption, option) => mixedOption === option;
+const isOptionSeparateFromValue = (mixedOption, option) =>
+  mixedOption === option;
 
 const getOptionValue = function(mixedOptionAndValue, option, substrIndex) {
   let optionValue = 10;
@@ -42,7 +43,7 @@ const extractUserInput = function(userInput) {
   let regex = "^" + option + "[-0-9]";
   regex = new RegExp(regex);
   let substrIndex = getSubstrIndex(userInput[0], regex);
-  let optionValue = getOptionValue(userInput.slice(0,2), option, substrIndex);
+  let optionValue = getOptionValue(userInput.slice(0, 2), option, substrIndex);
   let fileReaderIndex = getFileReaderIndex(userInput[0], option);
   filePaths = userInput.slice(fileReaderIndex);
   prerequisites = { filePaths, optionValue, option };

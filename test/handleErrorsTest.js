@@ -36,7 +36,7 @@ describe("handleMissingFile", function() {
       occured: 1,
       message: "head: file2: No such file or directory"
     };
-    let prerequisites = {'action' : 'head'};
+    let prerequisites = { action: "head" };
     let actualOutput = handleMissingFile(exists, "file2", prerequisites);
     assert.deepEqual(expectedOutput, actualOutput);
   });
@@ -48,7 +48,7 @@ describe("handleTailIllegalOffset", function() {
       occured: 1,
       message: "tail: illegal offset -- 5f"
     };
-    let actualOutput = handleTailIllegalOffset('5f');
+    let actualOutput = handleTailIllegalOffset("5f");
     assert.deepEqual(expectedOutput, actualOutput);
   });
 });

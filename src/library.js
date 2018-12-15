@@ -3,28 +3,25 @@ const {
   sliceContentsByLines,
   sliceContentsByCharacters
 } = require("./util.js");
-const {
-  handleErrors
-} = require("./handleErrors.js");
+const { handleErrors } = require("./handleErrors.js");
 
 const isOnlyOneFile = numberOfFiles => numberOfFiles === 1;
 
 const getContentsSlicer = function(option) {
-  let contentsSlicer = {'-n' : sliceContentsByLines, '-c' : sliceContentsByCharacters};
+  let contentsSlicer = {
+    "-n": sliceContentsByLines,
+    "-c": sliceContentsByCharacters
+  };
   return contentsSlicer[option];
-}
+};
 
 const getRange = function(optionValue, action) {
-  let range = {'head': [0, optionValue], 'tail': [-Math.abs(optionValue)]};
+  let range = { head: [0, optionValue], tail: [-Math.abs(optionValue)] };
   return range[action];
-}
+};
 
 const headForMultipleFiles = function(fs, sliceContents, prerequisites) {
-  let reducer = createReducer(
-    fs,
-    sliceContents,
-    prerequisites
-  );
+  let reducer = createReducer(fs, sliceContents, prerequisites);
   return prerequisites.filePaths.reduce(reducer, "");
 };
 
@@ -36,7 +33,7 @@ const getContents = function(fs, prerequisites) {
   if (error.occured) {
     return error.message;
   }
-  
+
   let range = getRange(optionValue, action);
   prerequisites.range = range;
   let sliceContents = getContentsSlicer(option);
