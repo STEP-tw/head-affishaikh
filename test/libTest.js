@@ -253,5 +253,3 @@ describe("getContents", function() {
     assert.equal(actualOutput, expectedOutput);
   });
 });
-
-module.exports = { createReader, createExistsSync };
