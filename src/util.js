@@ -43,8 +43,8 @@ const sliceContentsByCharacters = function(fs, filePath, prerequisites) {
 const createReducer = function(fs, sliceContents, prerequisites) {
   let delimeter = "";
   return function(result, filePath) {
-    let heading = "==> " + filePath + " <==\n";
     let { action } = prerequisites;
+    let heading = "==> " + filePath + " <==\n";
     let slicedContents = sliceContents(fs, filePath, prerequisites);
     if (
       slicedContents ===

@@ -1,18 +1,20 @@
+const isActionHead = action => action === 'head'
 const handleErrors = function(headPrerequisites) {
-  let { filePaths, optionValue, option, action } = headPrerequisites;
-  let error = {};
-  if (action === "head") {
-    error = handleHeadIllegalCount(optionValue, option);
-    return error;
+  let { optionValue, option, action } = headPrerequisites;
+  if (isActionHead(action)) {
+    return handleHeadIllegalCount(optionValue, option);
   }
   return handleTailIllegalOffset(optionValue);
 };
+
+const isZeroOrNegative = optionValue => optionValue <= 0
+const isOptionValueIllegal = optionValue => isZeroOrNegative(optionValue) || isNaN(optionValue)
 
 const handleHeadIllegalCount = function(optionValue, option) {
   let error = { occured: 0 };
   let errorOptions = { "-n": "line", "-c": "byte" };
 
-  if (optionValue <= 0 || isNaN(optionValue)) {
+  if (isOptionValueIllegal(optionValue)) {
     error.occured = 1;
     error.message =
       "head: illegal " + errorOptions[option] + " count -- " + optionValue;
