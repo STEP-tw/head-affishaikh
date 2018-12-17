@@ -59,17 +59,8 @@ const createReducer = function(fs, sliceContents, prerequisites) {
   };
 };
 
-const optionExtractor = function(option) {
-  let extractedOption = "-n";
-  if (option.match(/^-c/)) {
-    extractedOption = "-c";
-  }
-  return extractedOption;
-};
-
 module.exports = {
   createReducer,
-  optionExtractor,
   sliceContentsByLines,
   sliceContentsByCharacters
 };

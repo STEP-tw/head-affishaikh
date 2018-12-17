@@ -1,4 +1,4 @@
-const { optionExtractor } = require("./util.js");
+const { optionExtractor } = require("./parseUtility.js");
 
 const isOptionExplicit = (option, regex) => option.match(regex);
 
