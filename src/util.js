@@ -5,6 +5,18 @@ const isActionTail = action => action === "tail";
 const isTailRangeZero = (range, action) =>
   isRangeZero(range) && isActionTail(action);
 
+const readFile = function(fs, filePath, prerequisites) {
+  let { readFileSync, existsSync } = fs;
+
+  let error = handleMissingFile(existsSync, filePath, prerequisites);
+  if (error.occured) {
+    return error.message;
+  }
+
+  let result = readFileSync(filePath, "utf8");
+  return result;
+};
+
 const sliceContentsByLines = function(fs, filePath, prerequisites) {
   let { readFileSync, existsSync } = fs;
   let { range, action } = prerequisites;
@@ -62,5 +74,6 @@ const createReducer = function(fs, sliceContents, prerequisites) {
 module.exports = {
   createReducer,
   sliceContentsByLines,
-  sliceContentsByCharacters
+  sliceContentsByCharacters,
+  readFile
 };
