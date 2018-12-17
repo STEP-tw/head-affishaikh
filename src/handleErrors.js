@@ -1,4 +1,5 @@
 const isActionHead = action => action === 'head'
+
 const handleErrors = function(headPrerequisites) {
   let { optionValue, option, action } = headPrerequisites;
   if (isActionHead(action)) {
