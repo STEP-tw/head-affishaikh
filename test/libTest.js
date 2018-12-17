@@ -1,4 +1,5 @@
-const { getContents } = require("../src/library.js");
+const { getContents, getContentsSlicer } = require("../src/library.js");
+const {sliceContentsByLines, sliceContentsByCharacters} = require('../src/util.js');
 const assert = require("assert");
 
 const createReader = function(expectedFiles, expectedEncoding) {
@@ -251,5 +252,25 @@ describe("getContents", function() {
     fs.existsSync = createExistsSync(["./data.txt"]);
     let actualOutput = getContents(fs, prerequisites);
     assert.equal(actualOutput, expectedOutput);
+  });
+});
+
+describe('getContentsSlicer', function(){
+  it('should return function sliceContentsByLines when given -n option', function(){
+    let expectedOutput = sliceContentsByLines;
+    let actualOutput = getContentsSlicer('-n');
+    assert.deepEqual(actualOutput, expectedOutput);
+  });
+
+  it('should return function sliceContentsByCharacters when given -c option', function(){
+    let expectedOutput = sliceContentsByCharacters;
+    let actualOutput = getContentsSlicer('-c');
+    assert.deepEqual(actualOutput, expectedOutput);
+  });
+
+  it('should return undefined when given -a option', function(){
+    let expectedOutput = undefined;
+    let actualOutput = getContentsSlicer('-a');
+    assert.deepEqual(actualOutput, expectedOutput);
   });
 });

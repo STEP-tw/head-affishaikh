@@ -1,7 +1,7 @@
 --------- src/utilTest.js -----------
 
 1.  lineNumber : 2
-    description : Function optionExtractor does not look like a general purpose utility. It might be possible to extract it in parseUtility.js or something similar.
+    description : Function optionExtractor does not look like a general purpose utility. It might be possible to extract it in parseUtility.js or something similar. 
 
 2.  lineNumber : 3, 4
     description : Function names - sliceContentsByLines and sliceContentsByCharacters should end with singular forms.
@@ -129,5 +129,5 @@
 
 --------- test/library.js -----------
 
-1.  lineNumber : 23
+1.  <<< Done    lineNumber : 23
     description : variable name headForMultipleFiles specifies that it is only for head and not for tail.

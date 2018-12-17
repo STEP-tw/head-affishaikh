@@ -47,4 +47,4 @@ const getContents = function(fs, prerequisites) {
   return result;
 };
 
-module.exports = { getContents };
+module.exports = { getContents, getContentsSlicer };
