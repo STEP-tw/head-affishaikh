@@ -20,7 +20,7 @@ const getRange = function(optionValue, action) {
   return range[action];
 };
 
-const headForMultipleFiles = function(fs, sliceContents, prerequisites) {
+const actionForMultipleFiles = function(fs, sliceContents, prerequisites) {
   let reducer = createReducer(fs, sliceContents, prerequisites);
   return prerequisites.filePaths.reduce(reducer, "");
 };
@@ -43,7 +43,7 @@ const getContents = function(fs, prerequisites) {
     return result;
   }
 
-  result = headForMultipleFiles(fs, sliceContents, prerequisites);
+  result = actionForMultipleFiles(fs, sliceContents, prerequisites);
   return result;
 };
 

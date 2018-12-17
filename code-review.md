@@ -127,7 +127,7 @@
 4.  lineNumber : 29, 64
     description : small data for expectedOutput can be used. it makes it more readable
 
---------- test/libTest.js -----------
+--------- test/library.js -----------
 
 1.  lineNumber : 23
     description : variable name headForMultipleFiles specifies that it is only for head and not for tail.
