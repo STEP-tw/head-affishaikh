@@ -60,10 +60,7 @@
 1.  Missing test
     description : Tests for handleErrors function are missing.
 
-2.  lineNumber : 2, 4
-    description : Function names handleHeadIllegalCount and handleTailIllegalOffset can be made more implicit.
-
-3.  lineNumber : 20, 29, 41, 52
+3.  <<< Done    lineNumber : 20, 29, 41, 52
     description : Argument order for deepEqual should follow a convention.
 
 4.  lineNumber : 14, 23, 34
@@ -86,7 +83,7 @@
 3.  lineNumber : 51
     Misleading tests
 
-4.  lineNumber : 62, 16
+4.  <<< Done    lineNumber : 62, 16
     Inconsistent identation
 
 5.  Missing tests

@@ -11,44 +11,46 @@ const exists = function(fileName) {
 };
 
 describe('handleHeadIllegalCount', function() {
-  it('should return error object with errorOccured set to 1 and an error message for line when given optionValue as 0 and option as -n', function() {
-    let expectedOutput = {
-      occured: 1,
-      message: 'head: illegal line count -- 0'
-    };
-    let actualOutput = handleHeadIllegalCount(0, '-n');
-    assert.deepEqual(expectedOutput, actualOutput);
-  });
+  describe('should return an error object when optionValue is not a natural number', function() {
+    it('for lines', function() {
+      let expectedOutput = {
+        occured: true,
+        message: 'head: illegal line count -- 0'
+      };
+      let actualOutput = handleHeadIllegalCount(0, '-n');
+      assert.deepEqual(actualOutput, expectedOutput);
+    });
 
-  it('should return error object with errorOccured set to 1 and an error message for byte when given optionValue as 0and option as -c', function() {
-    let expectedOutput = {
-      occured: 1,
-      message: 'head: illegal byte count -- 0'
-    };
-    let actualOutput = handleHeadIllegalCount(0, '-c');
-    assert.deepEqual(expectedOutput, actualOutput);
+    it('for bytes', function() {
+      let expectedOutput = {
+        occured: true,
+        message: 'head: illegal byte count -- 0'
+      };
+      let actualOutput = handleHeadIllegalCount(0, '-c');
+      assert.deepEqual(actualOutput, expectedOutput);
+    });
   });
 });
 
 describe('handleMissingFile', function() {
-  it('should return error object with errorOccured set to 1 and an error message when given name of a missing file', function() {
+  it('should return error object when given a missing file', function() {
     let expectedOutput = {
-      occured: 1,
+      occured: true,
       message: 'head: file2: No such file or directory'
     };
     let prerequisites = { action: 'head' };
     let actualOutput = handleMissingFile(exists, 'file2', prerequisites);
-    assert.deepEqual(expectedOutput, actualOutput);
+    assert.deepEqual(actualOutput, expectedOutput);
   });
 });
 
 describe('handleTailIllegalOffset', function() {
-  it('should provide tail illegal offset error when given 5f', function() {
+  it('should provide tail illegal offset error when given an illegal offset', function() {
     let expectedOutput = {
-      occured: 1,
+      occured: true,
       message: 'tail: illegal offset -- 5f'
     };
     let actualOutput = handleTailIllegalOffset('5f');
-    assert.deepEqual(expectedOutput, actualOutput);
+    assert.deepEqual(actualOutput, expectedOutput);
   });
 });
