@@ -57,19 +57,16 @@
     description : Missing semicolon
 
 --------- test/handleErrorsTest.js -----------
-1.  Missing test
+1.  <<< Done    Missing test
     description : Tests for handleErrors function are missing.
 
 3.  <<< Done    lineNumber : 20, 29, 41, 52
     description : Argument order for deepEqual should follow a convention.
 
-4.  lineNumber : 14, 23, 34
+4.  <<< Done    lineNumber : 14, 23, 34
     Poor description of tests
     description : Description in it blocks can be nested.
-
-5.  Missing tests
-    description : Test cases for handleTailIllegalOffset are not sufficient.
-
+    
 --------- test/handleUserInputTest.js -----------
 
 1.  lineNumber : 5

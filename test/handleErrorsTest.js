@@ -1,4 +1,5 @@
 const {
+  handleErrors,
   handleHeadIllegalCount,
   handleMissingFile,
   handleTailIllegalOffset
@@ -9,6 +10,36 @@ const exists = function(fileName) {
   let files = ['file1'];
   return files.includes(fileName);
 };
+
+describe('handleErrors', function() {
+  describe('should return an error object', function() {
+    it('head', function() {
+      let prerequisites = {};
+      prerequisites.optionValue = '-2';
+      prerequisites.option = '-n';
+      prerequisites.action = 'head';
+      let expectedOutput = {
+        occured: true,
+        message: 'head: illegal line count -- -2'
+      };
+      let actualOutput = handleErrors(prerequisites);
+      assert.deepEqual(actualOutput, expectedOutput);
+    });
+
+    it('tail', function() {
+      let prerequisites = {};
+      prerequisites.optionValue = 'a2';
+      prerequisites.option = '-n';
+      prerequisites.action = 'tail';
+      let expectedOutput = {
+        occured: true,
+        message: 'tail: illegal offset -- a2'
+      };
+      let actualOutput = handleErrors(prerequisites);
+      assert.deepEqual(actualOutput, expectedOutput);
+    });
+  });
+});
 
 describe('handleHeadIllegalCount', function() {
   describe('should return an error object when optionValue is not a natural number', function() {

@@ -1,7 +1,7 @@
 const isActionHead = action => action === 'head';
 
-const handleErrors = function(headPrerequisites) {
-  let { optionValue, option, action } = headPrerequisites;
+const handleErrors = function(prerequisites) {
+  let { optionValue, option, action } = prerequisites;
   if (isActionHead(action)) {
     return handleHeadIllegalCount(optionValue, option);
   }
