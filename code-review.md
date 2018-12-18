@@ -3,36 +3,36 @@
 1.  <<<Done lineNumber : 2
     description : Function optionExtractor does not look like a general purpose utility. It might be possible to extract it in parseUtility.js or something similar. 
 
-2.  lineNumber : 3, 4
+2.  <<< Done    lineNumber : 3, 4
     description : Function names - sliceContentsByLines and sliceContentsByCharacters should end with singular forms.
 
-3.  lineNumber : 3, 4
+3.  <<< Done    lineNumber : 3, 4
     description : functions - sliceContentsByLines and sliceContentsByCharacters does not look like a general purpose utility. It might be in stringUtility.js.
 
-4. lineNumber : 8
+4.  lineNumber : 8
     description : The variable name expectedFiles does not specify that its an object. It creates confusion that its an array.
 
 5.  lineNumber : 47
     description : Variable optionValue is redundant. It should be used only once.
 
-6.  lineNumber : 35, 40
+6.  <<< Done    lineNumber : 35, 40
     Typo, Misleading Tests
     description : Passed arguments does not match description of the test.
 
-7.  lineNumber : 44, 81
+7.  <<< Done    lineNumber : 44, 81
     description : The word Contents in sliceContentsByLines and sliceContentsByCharacters limits the functionality only for file contents.
 
-8.  lineNumber : 44, 81
+8.  <<< Done    lineNumber : 44, 81
     Missing Tests
     description : Tests for multiple files are missing for functions sliceContentsByCharacters sliceContentsByCharacters.
 
-9.  Missing Tests
+9.  <<< Done    Missing Tests
     1. Tests for tail are missing for functions sliceContentsByCharacters and sliceContentsByLines.
     2. Tests for createReducer.
 
 --------- src/util.js -----------
 
-1.  lineNumber : 8, 26
+1.  <<< Done    lineNumber : 8, 26
     codeSmell : Long method 
     description : Function sliceContentsByLines and sliceContentsByCharacters is having many responsibilities. Responsibilities are :
     1.  Reading file
@@ -42,21 +42,17 @@
 2.  lineNumber : 8, other lines, files etc
    description : prerequisites as a name is too vague. Should try to make it more expressive. 
 
-3.  isTailRangeZero : 17
+3.  <<< Done    isTailRangeZero : 17
     description : function at an unexpected place. i don't expect it to be handled in sliceContentsByLines.
 
-4.  line : 21
+4.  <<< Done    line : 21
     Unnecessary temp variable.
 
-5.  line : 47
-    Poor naming
-    description : variable name filePath might be fileName.
-
 --------- src/handleErrors.js -----------
-1.  lineNumber : 38, 40
+1.  <<< Done    lineNumber : 38, 40
     description : error.occured should have a boolean value.
 
-2.  lineNumber : 1, 10, 11
+2.  <<< Done    lineNumber : 1, 10, 11
     Typo
     description : Missing semicolon
 

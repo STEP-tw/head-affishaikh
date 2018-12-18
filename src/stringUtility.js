@@ -1,9 +1,9 @@
 const sliceDataByLine = function(data, prerequisites) {
   let { range } = prerequisites;
   return data
-    .split("\n")
+    .split('\n')
     .slice(range[0], range[1])
-    .join("\n");
+    .join('\n');
 };
 
 const sliceDataByCharacter = function(data, prerequisites) {

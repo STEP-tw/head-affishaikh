@@ -1,6 +1,4 @@
-const { handleMissingFile } = require("./handleErrors.js");
-
-
+const { handleMissingFile } = require('./handleErrors.js');
 
 const readFile = function(fs, filePath, prerequisites) {
   let { readFileSync, existsSync } = fs;
@@ -10,31 +8,28 @@ const readFile = function(fs, filePath, prerequisites) {
     return error.message;
   }
 
-  let result = readFileSync(filePath, "utf8");
+  let result = readFileSync(filePath, 'utf8');
   return result;
 };
 
 const createReducer = function(fs, sliceContents, prerequisites) {
-  let delimeter = "";
+  let delimeter = '';
   return function(result, filePath) {
     let { action } = prerequisites;
     let fileExists = true;
-    let heading = "==> " + filePath + " <==\n";
+    let heading = '==> ' + filePath + ' <==\n';
     let fileData = readFile(fs, filePath, prerequisites);
-    if (
-      fileData ===
-      action + ": " + filePath + ": No such file or directory"
-    ) {
+    if (fileData === action + ': ' + filePath + ': No such file or directory') {
       fileExists = false;
-      heading = "";
+      heading = '';
     }
     let slicedData = fileData;
-    if(fileExists) {
+    if (fileExists) {
       slicedData = sliceContents(fileData, prerequisites);
     }
     result = result + delimeter + heading;
     result = result + slicedData;
-    delimeter = "\n";
+    delimeter = '\n';
     return result;
   };
 };

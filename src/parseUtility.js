@@ -1,7 +1,7 @@
 const optionExtractor = function(option) {
-  let extractedOption = "-n";
+  let extractedOption = '-n';
   if (option.match(/^-c/)) {
-    extractedOption = "-c";
+    extractedOption = '-c';
   }
   return extractedOption;
 };

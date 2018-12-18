@@ -1,4 +1,4 @@
-const { optionExtractor } = require("./parseUtility.js");
+const { optionExtractor } = require('./parseUtility.js');
 
 const isOptionExplicit = (option, regex) => option.match(regex);
 
@@ -40,7 +40,7 @@ const extractUserInput = function(userInput) {
   let prerequisites = {};
   let filePaths = [];
   let option = optionExtractor(userInput[0]);
-  let regex = "^" + option + "[-0-9]";
+  let regex = '^' + option + '[-0-9]';
   regex = new RegExp(regex);
   let substrIndex = getSubstrIndex(userInput[0], regex);
   let optionValue = getOptionValue(userInput.slice(0, 2), option, substrIndex);

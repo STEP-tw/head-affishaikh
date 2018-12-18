@@ -1,7 +1,5 @@
 const {
-  readFile,
-  sliceContentsByLines,
-  sliceContentsByCharacters
+  readFile
 } = require("../src/util.js");
 const assert = require("assert");
 

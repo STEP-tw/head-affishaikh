@@ -1,15 +1,13 @@
 const { createReducer, readFile } = require("./util.js");
 
+const { sliceDataByLine, sliceDataByCharacter } = require("./stringUtility.js");
+
+const { handleErrors } = require("./handleErrors.js");
+
 const isRangeZero = range => range[0] === 0;
 const isActionTail = action => action === "tail";
 const isTailRangeZero = (range, action) =>
   isRangeZero(range) && isActionTail(action);
-
-const {
-  sliceDataByLine,
-  sliceDataByCharacter
-} = require("./stringUtility.js");
-const { handleErrors } = require("./handleErrors.js");
 
 const isOnlyOneFile = numberOfFiles => numberOfFiles === 1;
 
@@ -43,15 +41,18 @@ const getContents = function(fs, prerequisites) {
   let range = getRange(optionValue, action);
   prerequisites.range = range;
   let sliceContents = getContentsSlicer(option);
-  let fileData = '';
+  let fileData = "";
 
-  if(isTailRangeZero(range, action)) {
-    return '';
+  if (isTailRangeZero(range, action)) {
+    return "";
   }
 
   if (isOnlyOneFile(numberOfFiles)) {
     fileData = readFile(fs, filePaths[0], prerequisites);
-    if(fileData === action + ': ' + filePaths[0] +': ' + 'No such file or directory') {
+    if (
+      fileData ===
+      action + ": " + filePaths[0] + ": " + "No such file or directory"
+    ) {
       return fileData;
     }
     result = sliceContents(fileData, prerequisites);
