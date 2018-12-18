@@ -12,7 +12,7 @@
 4.  lineNumber : 8
     description : The variable name expectedFiles does not specify that its an object. It creates confusion that its an array.
 
-5.  lineNumber : 47
+5.  <<< Done    lineNumber : 47
     description : Variable optionValue is redundant. It should be used only once.
 
 6.  <<< Done    lineNumber : 35, 40
@@ -39,9 +39,6 @@
     2.  Handling errors
     3.  Splitting, slicing and joining strings.
 
-2.  lineNumber : 8, other lines, files etc
-   description : prerequisites as a name is too vague. Should try to make it more expressive. 
-
 3.  <<< Done    isTailRangeZero : 17
     description : function at an unexpected place. i don't expect it to be handled in sliceContentsByLines.
 
@@ -66,25 +63,18 @@
 4.  <<< Done    lineNumber : 14, 23, 34
     Poor description of tests
     description : Description in it blocks can be nested.
-    
+
 --------- test/handleUserInputTest.js -----------
 
-1.  lineNumber : 5
-    poor description of tests
-    description : option is not specified in the test description
-
-2. lineNumber : 5, 15, 21, 31, 41, 51, 61, 67
+2.  <<< Done    lineNumber : 5, 15, 21, 31, 41, 51, 61, 67
     poor description of tests
     description : tests description can be nested to make it readable
 
-3.  lineNumber : 51
+3.  <<< Done    lineNumber : 51
     Misleading tests
 
 4.  <<< Done    lineNumber : 62, 16
     Inconsistent identation
-
-5.  Missing tests
-    description : Missing test for default case of characters
 
 --------- src/handleUserInput.js -----------
 
