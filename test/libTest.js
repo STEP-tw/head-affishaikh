@@ -1,5 +1,5 @@
 const { getContents, getContentsSlicer } = require("../src/library.js");
-const {sliceContentsByLines, sliceContentsByCharacters} = require('../src/util.js');
+const {sliceDataByLine, sliceDataByCharacter} = require('../src/stringUtility.js');
 const assert = require("assert");
 
 const createReader = function(expectedFiles, expectedEncoding) {
@@ -77,7 +77,7 @@ describe("getContents", function() {
     assert.equal(actualOutput, expectedOutput);
   });
 
-  it("should return a string of 5 characters from testFile2 when give -c5 and filename", function() {
+  it("should return a string of 5 characters from testFile2 when given -c5 and filename", function() {
     let prerequisites = {
       filePaths: ["./testData/testFile2"],
       optionValue: 5,
@@ -86,7 +86,7 @@ describe("getContents", function() {
     };
     let expectedOutput = "Optim";
     let expectedFiles = {};
-    expectedFiles["./testData/testFile2"] = "Optim";
+    expectedFiles["./testData/testFile2"] = "Optimus Prime";
     fs.readFileSync = createReader(expectedFiles, "utf8");
     fs.existsSync = createExistsSync(["./testData/testFile2"]);
     let actualOutput = getContents(fs, prerequisites);
@@ -256,14 +256,14 @@ describe("getContents", function() {
 });
 
 describe('getContentsSlicer', function(){
-  it('should return function sliceContentsByLines when given -n option', function(){
-    let expectedOutput = sliceContentsByLines;
+  it('should return function sliceDataByLine when given -n option', function(){
+    let expectedOutput = sliceDataByLine;
     let actualOutput = getContentsSlicer('-n');
     assert.deepEqual(actualOutput, expectedOutput);
   });
 
-  it('should return function sliceContentsByCharacters when given -c option', function(){
-    let expectedOutput = sliceContentsByCharacters;
+  it('should return function sliceDataByCharacter when given -c option', function(){
+    let expectedOutput = sliceDataByCharacter;
     let actualOutput = getContentsSlicer('-c');
     assert.deepEqual(actualOutput, expectedOutput);
   });

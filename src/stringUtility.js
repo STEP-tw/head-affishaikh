@@ -6,9 +6,9 @@ const sliceDataByLine = function(data, prerequisites) {
     .join("\n");
 };
 
-const sliceDataByCharacters = function(data, prerequisites) {
+const sliceDataByCharacter = function(data, prerequisites) {
   let { range } = prerequisites;
   return data.substr(range[0], range[1]);
 };
 
-module.exports = { sliceDataByLine, sliceDataByCharacters };
+module.exports = { sliceDataByLine, sliceDataByCharacter };

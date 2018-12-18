@@ -1,9 +1,6 @@
 const { handleMissingFile } = require("./handleErrors.js");
 
-const isRangeZero = range => range[0] === 0;
-const isActionTail = action => action === "tail";
-const isTailRangeZero = (range, action) =>
-  isRangeZero(range) && isActionTail(action);
+
 
 const readFile = function(fs, filePath, prerequisites) {
   let { readFileSync, existsSync } = fs;
@@ -17,55 +14,26 @@ const readFile = function(fs, filePath, prerequisites) {
   return result;
 };
 
-const sliceContentsByLines = function(fs, filePath, prerequisites) {
-  let { readFileSync, existsSync } = fs;
-  let { range, action } = prerequisites;
-
-  let error = handleMissingFile(existsSync, filePath, prerequisites);
-  if (error.occured) {
-    return error.message;
-  }
-
-  if (isTailRangeZero(range, action)) {
-    return "";
-  }
-
-  let result = readFileSync(filePath, "utf8").split("\n");
-  result = result.slice(range[0], range[1]).join("\n");
-  return result;
-};
-
-const sliceContentsByCharacters = function(fs, filePath, prerequisites) {
-  let { readFileSync, existsSync } = fs;
-  let { range, action } = prerequisites;
-
-  let error = handleMissingFile(existsSync, filePath, prerequisites);
-  if (error.occured) {
-    return error.message;
-  }
-
-  if (isTailRangeZero(range, action)) {
-    return "";
-  }
-
-  let result = readFileSync(filePath, "utf8").substr(range[0], range[1]);
-  return result;
-};
-
 const createReducer = function(fs, sliceContents, prerequisites) {
   let delimeter = "";
   return function(result, filePath) {
     let { action } = prerequisites;
+    let fileExists = true;
     let heading = "==> " + filePath + " <==\n";
-    let slicedContents = sliceContents(fs, filePath, prerequisites);
+    let fileData = readFile(fs, filePath, prerequisites);
     if (
-      slicedContents ===
+      fileData ===
       action + ": " + filePath + ": No such file or directory"
     ) {
+      fileExists = false;
       heading = "";
     }
+    let slicedData = fileData;
+    if(fileExists) {
+      slicedData = sliceContents(fileData, prerequisites);
+    }
     result = result + delimeter + heading;
-    result = result + slicedContents;
+    result = result + slicedData;
     delimeter = "\n";
     return result;
   };
@@ -73,7 +41,5 @@ const createReducer = function(fs, sliceContents, prerequisites) {
 
 module.exports = {
   createReducer,
-  sliceContentsByLines,
-  sliceContentsByCharacters,
   readFile
 };
