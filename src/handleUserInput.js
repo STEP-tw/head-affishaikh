@@ -1,10 +1,10 @@
 const { optionExtractor } = require('./parseUtility.js');
 
-const isOptionExplicit = (option, regex) => option.match(regex);
+const isOptionAttachedWithValue = (option, regex) => option.match(regex);
 
 const getSubstrIndex = function(option, regex) {
   let substrIndex = 1;
-  if (isOptionExplicit(option, regex)) {
+  if (isOptionAttachedWithValue(option, regex)) {
     substrIndex = 2;
   }
   return substrIndex;

@@ -55,7 +55,7 @@ const getContents = function(fs, prerequisites) {
     ) {
       return fileData;
     }
-    let result = sliceContents(fileData, prerequisites);
+    let result = sliceContents(fileData, prerequisites.range);
     return result;
   }
 

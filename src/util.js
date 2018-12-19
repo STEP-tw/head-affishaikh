@@ -25,7 +25,7 @@ const createReducer = function(fs, sliceContents, prerequisites) {
     }
     let slicedData = fileData;
     if (fileExists) {
-      slicedData = sliceContents(fileData, prerequisites);
+      slicedData = sliceContents(fileData, prerequisites.range);
     }
     result = result + delimeter + heading;
     result = result + slicedData;

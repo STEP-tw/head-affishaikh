@@ -10,7 +10,7 @@ describe('sliceDataByLine', function() {
     let prerequisites = {};
     prerequisites.range = [0, 5];
     let expectedOutput = '1\n2\n3\n4\n5';
-    let actualOutput = sliceDataByLine(data, prerequisites);
+    let actualOutput = sliceDataByLine(data, prerequisites.range);
     assert.deepEqual(actualOutput, expectedOutput);
   });
 });
@@ -20,7 +20,7 @@ describe('sliceDataByCharacter', function() {
     let prerequisites = {};
     prerequisites.range = [0, 5];
     let expectedOutput = '1\n2\n3';
-    let actualOutput = sliceDataByCharacter(data, prerequisites);
+    let actualOutput = sliceDataByCharacter(data, prerequisites.range);
     assert.deepEqual(actualOutput, expectedOutput);
   });
 });

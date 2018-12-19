@@ -1,14 +1,13 @@
-const sliceDataByLine = function(data, prerequisites) {
-  let { range } = prerequisites;
-  return data
-    .split('\n')
-    .slice(range[0], range[1])
-    .join('\n');
-};
+const sliceBy = function(data, range, delimiter) {
+  return data.split(delimiter).slice(range[0],range[1]).join(delimiter);
+}
 
-const sliceDataByCharacter = function(data, prerequisites) {
-  let { range } = prerequisites;
-  return data.substr(range[0], range[1]);
+const sliceDataByLine = function(data, range) {
+  return sliceBy(data, range, '\n');
+}
+
+const sliceDataByCharacter = function(data, range) {
+  return sliceBy(data, range, '');
 };
 
 module.exports = { sliceDataByLine, sliceDataByCharacter };
