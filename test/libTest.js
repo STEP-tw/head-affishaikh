@@ -1,4 +1,4 @@
-const { getContents, getContentsSlicer } = require('../src/library.js');
+const { getContents, getContentsSlicer } = require('../src/lib.js');
 const {
   sliceByLine,
   sliceByCharacter
