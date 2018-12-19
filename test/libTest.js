@@ -1,7 +1,7 @@
 const { getContents, getContentsSlicer } = require('../src/library.js');
 const {
-  sliceDataByLine,
-  sliceDataByCharacter
+  sliceByLine,
+  sliceByCharacter
 } = require('../src/stringUtility.js');
 const assert = require('assert');
 
@@ -259,14 +259,14 @@ describe('getContents', function() {
 });
 
 describe('getContentsSlicer', function() {
-  it('should return function sliceDataByLine when given -n option', function() {
-    let expectedOutput = sliceDataByLine;
+  it('should return function sliceByLine when given -n option', function() {
+    let expectedOutput = sliceByLine;
     let actualOutput = getContentsSlicer('-n');
     assert.deepEqual(actualOutput, expectedOutput);
   });
 
-  it('should return function sliceDataByCharacter when given -c option', function() {
-    let expectedOutput = sliceDataByCharacter;
+  it('should return function sliceByCharacter when given -c option', function() {
+    let expectedOutput = sliceByCharacter;
     let actualOutput = getContentsSlicer('-c');
     assert.deepEqual(actualOutput, expectedOutput);
   });

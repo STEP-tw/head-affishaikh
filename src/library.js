@@ -1,6 +1,6 @@
 const { createReducer, readFile } = require("./util.js");
 
-const { sliceDataByLine, sliceDataByCharacter } = require("./stringUtility.js");
+const { sliceByLine, sliceByCharacter } = require("./stringUtility.js");
 
 const { handleErrors } = require("./handleErrors.js");
 
@@ -13,8 +13,8 @@ const isOnlyOneFile = numberOfFiles => numberOfFiles === 1;
 
 const getContentsSlicer = function(option) {
   let contentsSlicer = {
-    "-n": sliceDataByLine,
-    "-c": sliceDataByCharacter
+    "-n": sliceByLine,
+    "-c": sliceByCharacter
   };
   return contentsSlicer[option];
 };

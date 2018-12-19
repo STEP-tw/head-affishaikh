@@ -1,36 +1,36 @@
 const { optionExtractor } = require('./parseUtility.js');
 
-const isOptionAttachedWithValue = (option, regex) => option.match(regex);
+const isOptionAttachedWithValue = (unextractedOption, regex) => unextractedOption.match(regex);
 
-const getSubstrIndex = function(option, regex) {
+const getSubstrIndex = function(unextractedOption, regex) {
   let substrIndex = 1;
-  if (isOptionAttachedWithValue(option, regex)) {
+  if (isOptionAttachedWithValue(unextractedOption, regex)) {
     substrIndex = 2;
   }
   return substrIndex;
 };
 
-const isOptionValueGiven = option => option.match(/^-/);
-const isOptionSeparateFromValue = (mixedOption, option) =>
-  mixedOption === option;
+const isOptionValueProvided = unextractedOption => unextractedOption.match(/^-/);
+const isOptionSeparateFromValue = (unextractedOption, option) =>
+  unextractedOption === option;
 
-const getOptionValue = function(mixedOptionAndValue, option, substrIndex) {
+const getOptionValue = function(unextractedOption, option, substrIndex) {
   let optionValue = 10;
-  if (isOptionValueGiven(mixedOptionAndValue[0])) {
-    optionValue = mixedOptionAndValue[0].substr(substrIndex);
+  if (isOptionValueProvided(unextractedOption[0])) {
+    optionValue = unextractedOption[0].substr(substrIndex);
   }
-  if (isOptionSeparateFromValue(mixedOptionAndValue[0], option)) {
-    optionValue = mixedOptionAndValue[1];
+  if (isOptionSeparateFromValue(unextractedOption[0], option)) {
+    optionValue = unextractedOption[1];
   }
   return optionValue;
 };
 
-const getFileReaderIndex = function(mixedOption, option) {
+const getFileReaderIndex = function(unextractedOption, option) {
   let fileReaderIndex = 0;
-  if (isOptionValueGiven(mixedOption)) {
+  if (isOptionValueProvided(unextractedOption)) {
     fileReaderIndex = 1;
   }
-  if (isOptionSeparateFromValue(mixedOption, option)) {
+  if (isOptionSeparateFromValue(unextractedOption, option)) {
     fileReaderIndex = 2;
   }
   return fileReaderIndex;
