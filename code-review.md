@@ -78,7 +78,7 @@
 
 --------- src/handleUserInput.js -----------
 
-1.  lineNumber : 3, 14, 17
+1.  <<< Done    lineNumber : 3, 14, 17
     Poor naming
     description : 1.    function name isOptionExplicit is not meaningful.
     2.  function isOptionSeparateFromValue
