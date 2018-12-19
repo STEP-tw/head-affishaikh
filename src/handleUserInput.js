@@ -2,7 +2,9 @@ const { optionExtractor } = require('./parseUtility.js');
 
 const isOptionAttachedWithValue = (unextractedOption, regex) => unextractedOption.match(regex);
 
-const getIndexOfOptionValue = function(unextractedOption, regex) {
+const getIndexOfOptionValue = function(unextractedOption, option) {
+  let regex = '^' + option + '[0-9]';
+  regex = new RegExp(regex);
   if (isOptionAttachedWithValue(unextractedOption, regex)) {
     return 2;
   }
@@ -14,9 +16,7 @@ const isOptionSeparateFromValue = (unextractedOption, option) =>
   unextractedOption === option;
 
 const getOptionValue = function(unextractedOption, option) {
-  let regex = '^' + option + '[0-9]';
-  regex = new RegExp(regex);
-  let indexOfOptionValue = getIndexOfOptionValue(unextractedOption[0], regex);
+  let indexOfOptionValue = getIndexOfOptionValue(unextractedOption[0], option);
   let optionValue = 10;
   if (isOptionValueProvided(unextractedOption[0])) {
     optionValue = unextractedOption[0].substr(indexOfOptionValue);
