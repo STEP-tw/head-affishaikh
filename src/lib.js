@@ -1,22 +1,21 @@
-const { createReducer, readFile } = require("./util.js");
+const { createReducer, readFile } = require('./util.js');
 
-const { sliceByLine, sliceByCharacter } = require("./stringUtility.js");
+const { sliceByLine, sliceByCharacter } = require('./stringUtility.js');
 
-const { handleErrors } = require("./handleErrors.js");
+const { handleErrors } = require('./handleErrors.js');
 
 const isRangeZero = range => range[0] === 0;
-const isActionTail = action => action === "tail";
+const isActionTail = action => action === 'tail';
 const isTailRangeZero = (range, action) =>
   isRangeZero(range) && isActionTail(action);
 
 const isOnlyOneFile = numberOfFiles => numberOfFiles === 1;
 
 const getContentsSlicer = function(option) {
-  let contentsSlicer = {
-    "-n": sliceByLine,
-    "-c": sliceByCharacter
-  };
-  return contentsSlicer[option];
+  if (option === '-n') {
+    return sliceByLine;
+  }
+  return sliceByCharacter;
 };
 
 const getRange = function(optionValue, action) {
@@ -26,7 +25,20 @@ const getRange = function(optionValue, action) {
 
 const actionForMultipleFiles = function(fs, sliceContents, prerequisites) {
   let reducer = createReducer(fs, sliceContents, prerequisites);
-  return prerequisites.filePaths.reduce(reducer, "");
+  return prerequisites.filePaths.reduce(reducer, '');
+};
+
+const actionForSingleFile = function(fs, sliceContents, prerequisites) {
+  let { filePaths, action } = prerequisites;
+  let fileData = readFile(fs, filePaths[0], prerequisites);
+  if (
+    fileData ===
+    action + ': ' + filePaths[0] + ': ' + 'No such file or directory'
+  ) {
+    return fileData;
+  }
+  let result = sliceContents(fileData, prerequisites.range);
+  return result;
 };
 
 const getContents = function(fs, prerequisites) {
@@ -38,29 +50,19 @@ const getContents = function(fs, prerequisites) {
     return error.message;
   }
 
-  let range = getRange(optionValue, action);
-  prerequisites.range = range;
+  prerequisites.range = getRange(optionValue, action);
   let sliceContents = getContentsSlicer(option);
-  let fileData = "";
+  let fileData = '';
 
-  if (isTailRangeZero(range, action)) {
-    return "";
+  if (isTailRangeZero(prerequisites.range, action)) {
+    return '';
   }
 
   if (isOnlyOneFile(numberOfFiles)) {
-    fileData = readFile(fs, filePaths[0], prerequisites);
-    if (
-      fileData ===
-      action + ": " + filePaths[0] + ": " + "No such file or directory"
-    ) {
-      return fileData;
-    }
-    let result = sliceContents(fileData, prerequisites.range);
-    return result;
+    return actionForSingleFile(fs, sliceContents, prerequisites);
   }
 
-  result = actionForMultipleFiles(fs, sliceContents, prerequisites);
-  return result;
+  return actionForMultipleFiles(fs, sliceContents, prerequisites);
 };
 
 module.exports = { getContents, getContentsSlicer };

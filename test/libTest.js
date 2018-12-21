@@ -253,10 +253,4 @@ describe('getContentsSlicer', function() {
     let actualOutput = getContentsSlicer('-c');
     assert.deepEqual(actualOutput, expectedOutput);
   });
-
-  it('should return undefined when given -a option', function() {
-    let expectedOutput = undefined;
-    let actualOutput = getContentsSlicer('-a');
-    assert.deepEqual(actualOutput, expectedOutput);
-  });
 });
