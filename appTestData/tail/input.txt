@@ -1,2 +1,0 @@
--n|5|./testData/testFile3
--n|5|./testData/testFile3|./testData/testFile4

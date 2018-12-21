@@ -1,3 +1,0 @@
--n0|./testData/testFile1
--n11|file1
--n|10|./testData/testFile1|./testData/testFile2

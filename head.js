@@ -14,7 +14,7 @@
   node ./head.js -c 5 file1 file2
 */
 
-const { getContents } = require("./src/library.js");
+const { getContents } = require("./src/lib.js");
 const { extractUserInput } = require("./src/handleUserInput.js");
 const fs = require("fs");
 
