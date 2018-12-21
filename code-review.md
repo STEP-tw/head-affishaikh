@@ -90,7 +90,7 @@
 
 --------- test/libTest.js -----------
 
-1.  Poor naming of files
+1.  <<< Done    Poor naming of files
     description : library is library.js and its test is libTest.js that introduce inconsistency.
 
 2.  Missing Tests
@@ -100,11 +100,11 @@
     3. headForMultipleFiles
     4. isOnlyOneFile are missing
 
-3.  lineNumber : 21
+3.  <<< Done    lineNumber : 21
     Poor description of test
     description : The input to the function is not specified completely.
 
-4.  lineNumber : 29, 64
+4.  <<< Done    lineNumber : 29, 64
     description : small data for expectedOutput can be used. it makes it more readable
 
 --------- test/library.js -----------
