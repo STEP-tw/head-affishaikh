@@ -1,25 +1,10 @@
-const {
-  readFile
-} = require("../src/util.js");
-const assert = require("assert");
+const { readFile } = require('../src/util.js');
+const { createReader, createExistsSync } = require('./mockUtils');
+const assert = require('assert');
 
-const createReader = function(expectedFiles, expectedEncoding) {
-  return function(actualFilePath, actualEncoding) {
-    if (expectedEncoding === actualEncoding) {
-      return expectedFiles[actualFilePath];
-    }
-  };
-};
-
-const createExistsSync = function(fileNames) {
-  return function(fileName) {
-    return fileNames.includes(fileName);
-  };
-};
-
-describe('readFile', function(){
-  const fs = {}
-  it('should return the contents of file1 when given fs, file1 and prerequisites', function(){
+describe('readFile', function() {
+  const fs = {};
+  it('should return the contents of file1 when given fs, file1 and prerequisites', function() {
     let prerequisites = {};
     prerequisites.action = 'head';
     let expectedFiles = {};
@@ -32,7 +17,7 @@ describe('readFile', function(){
     assert.deepEqual(actualOutput, expectedOutput);
   });
 
-  it('should return an error message when given fs, file1 and prerequisites', function(){
+  it('should return an error message when given fs, file1 and prerequisites', function() {
     let prerequisites = {};
     prerequisites.action = 'head';
     fs.readFileSync = createReader({}, 'utf8');
