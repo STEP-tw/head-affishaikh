@@ -4,7 +4,7 @@ const assert = require('assert');
 
 describe('readFile', function() {
   const fs = {};
-  it('should return the contents of file1 when given fs, file1 and prerequisites', function() {
+  it('should return contents of file', function() {
     let prerequisites = {};
     prerequisites.action = 'head';
     let expectedFiles = {};
@@ -17,13 +17,12 @@ describe('readFile', function() {
     assert.deepEqual(actualOutput, expectedOutput);
   });
 
-  it('should return an error message when given fs, file1 and prerequisites', function() {
-    let prerequisites = {};
-    prerequisites.action = 'head';
+  it('should return an error message', function() {
+    let action = 'head';
     fs.readFileSync = createReader({}, 'utf8');
     fs.existsSync = createExistsSync([]);
     let expectedOutput = 'head: file1: No such file or directory';
-    let actualOutput = readFile(fs, 'file1', prerequisites);
+    let actualOutput = readFile(fs, 'file1', action);
     assert.deepEqual(actualOutput, expectedOutput);
   });
 });

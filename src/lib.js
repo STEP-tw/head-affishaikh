@@ -29,15 +29,15 @@ const actionForMultipleFiles = function(fs, sliceContents, prerequisites) {
 };
 
 const actionForSingleFile = function(fs, sliceContents, prerequisites) {
-  let { filePaths, action } = prerequisites;
-  let fileData = readFile(fs, filePaths[0], prerequisites);
+  let { filePaths, action, range } = prerequisites;
+  let fileData = readFile(fs, filePaths[0], action);
   if (
     fileData ===
     action + ': ' + filePaths[0] + ': ' + 'No such file or directory'
   ) {
     return fileData;
   }
-  let result = sliceContents(fileData, prerequisites.range);
+  let result = sliceContents(fileData, range);
   return result;
 };
 
@@ -52,7 +52,6 @@ const getContents = function(fs, prerequisites) {
 
   prerequisites.range = getRange(optionValue, action);
   let sliceContents = getContentsSlicer(option);
-  let fileData = '';
 
   if (isTailRangeZero(prerequisites.range, action)) {
     return '';

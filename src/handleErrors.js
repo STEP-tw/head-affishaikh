@@ -34,9 +34,8 @@ const handleTailIllegalOffset = function(optionValue) {
   return error;
 };
 
-const handleMissingFile = function(existsSync, fileName, prerequisites) {
+const handleMissingFile = function(existsSync, fileName, action) {
   let doesExist = existsSync(fileName);
-  let { action } = prerequisites;
   let error = { occured: false };
   if (!doesExist) {
     error.occured = true;

@@ -1,9 +1,9 @@
 const { handleMissingFile } = require('./handleErrors.js');
 
-const readFile = function(fs, filePath, prerequisites) {
+const readFile = function(fs, filePath, action) {
   let { readFileSync, existsSync } = fs;
 
-  let error = handleMissingFile(existsSync, filePath, prerequisites);
+  let error = handleMissingFile(existsSync, filePath, action);
   if (error.occured) {
     return error.message;
   }
@@ -18,7 +18,7 @@ const createReducer = function(fs, sliceContents, prerequisites) {
     let { action } = prerequisites;
     let fileExists = true;
     let heading = '==> ' + filePath + ' <==\n';
-    let fileData = readFile(fs, filePath, prerequisites);
+    let fileData = readFile(fs, filePath, action);
     if (fileData === action + ': ' + filePath + ': No such file or directory') {
       fileExists = false;
       heading = '';
