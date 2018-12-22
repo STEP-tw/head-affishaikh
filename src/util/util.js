@@ -1,4 +1,4 @@
-const { handleMissingFile } = require('./handleErrors.js');
+const { handleMissingFile } = require('../lib/handleErrors.js');
 
 const readFile = function(fs, filePath, action) {
   let { readFileSync, existsSync } = fs;

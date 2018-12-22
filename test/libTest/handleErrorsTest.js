@@ -3,7 +3,7 @@ const {
   handleHeadIllegalCount,
   handleMissingFile,
   handleTailIllegalOffset
-} = require('../src/handleErrors.js');
+} = require('../../src/lib/handleErrors.js');
 const assert = require('assert');
 
 const exists = function(fileName) {

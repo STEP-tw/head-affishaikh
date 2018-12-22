@@ -1,6 +1,6 @@
-const { createReducer, readFile } = require('./util.js');
+const { createReducer, readFile } = require('../util/util.js');
 
-const { sliceByLine, sliceByCharacter } = require('./stringUtility.js');
+const { sliceByLine, sliceByCharacter } = require('../util/stringUtility.js');
 
 const { handleErrors } = require('./handleErrors.js');
 

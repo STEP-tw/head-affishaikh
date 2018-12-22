@@ -1,4 +1,4 @@
-const { optionExtractor } = require('./parseUtility.js');
+const { optionExtractor } = require('../util/parseUtility.js');
 
 const isOptionAttachedWithValue = (unextractedOption, regex) => unextractedOption.match(regex);
 

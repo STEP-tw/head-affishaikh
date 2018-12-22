@@ -1,5 +1,5 @@
-const { readFile } = require('../src/util.js');
-const { createReader, createExistsSync } = require('./mockUtils');
+const { readFile } = require('../../src/util/util.js');
+const { createReader, createExistsSync } = require('../mockUtils');
 const assert = require('assert');
 
 describe('readFile', function() {

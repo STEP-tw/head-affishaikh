@@ -1,4 +1,4 @@
-const { optionExtractor } = require('../src/parseUtility.js');
+const { optionExtractor } = require('../../src/util/parseUtility.js');
 const assert = require('assert');
 
 describe('optionExtractor', function() {

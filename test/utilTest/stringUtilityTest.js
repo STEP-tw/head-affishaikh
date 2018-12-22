@@ -1,7 +1,7 @@
 const {
   sliceByLine,
   sliceByCharacter
-} = require('../src/stringUtility.js');
+} = require('../../src/util/stringUtility.js');
 const assert = require('assert');
 
 describe('sliceByLine', function() {

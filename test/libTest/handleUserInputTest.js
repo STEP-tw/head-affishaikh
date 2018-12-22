@@ -1,4 +1,4 @@
-const { extractUserInput } = require('../src/handleUserInput.js');
+const { extractUserInput } = require('../../src/lib/handleUserInput.js');
 const assert = require('assert');
 
 describe('extractUserInput', function() {
