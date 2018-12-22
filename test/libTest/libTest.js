@@ -1,6 +1,6 @@
 const { getContents, getContentsSlicer } = require('../../src/lib/lib.js');
 const { sliceByLine, sliceByCharacter } = require('../../src/util/stringUtility.js');
-const { createReader, createExistsSync } = require('../mockUtils.js');
+const { createReader, createExistsSync } = require('../../src/util/mockUtils.js');
 const assert = require('assert');
 
 describe('getContents', function() {
