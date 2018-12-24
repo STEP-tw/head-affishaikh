@@ -1,0 +1,26 @@
+{
+  "name": "head_and_tail",
+  "version": "0.0.1",
+  "description": "Simulation of head and tail commands",
+  "main": "head.js, tail.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/STEP-tw/head-affishaikh.git"
+  },
+  "author": "Aftab Shaikh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/STEP-tw/head-affishaikh/issues"
+  },
+  "homepage": "https://github.com/STEP-tw/head-affishaikh#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "mocha": "^5.2.0"
+  }
+}

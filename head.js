@@ -1,5 +1,5 @@
-const { getContents } = require("./src/lib.js");
-const { extractUserInput } = require("./src/handleUserInput.js");
+const { getContents } = require("./src/lib/lib.js");
+const { extractUserInput } = require("./src/lib/handleUserInput.js");
 const fs = require("fs");
 
 const main = function(userInputForHead) {
